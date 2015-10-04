@@ -6,4 +6,5 @@ word_obj: 	driver_obj
 	g++ -c Word.cpp
 driver_obj:
 	g++ -c Driver.cpp
-
+clean:
+	rm *.o *.exe
