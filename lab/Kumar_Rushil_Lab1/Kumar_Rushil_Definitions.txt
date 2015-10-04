@@ -1,0 +1,7 @@
+man -> opens up the manuals for commands in an editor. Uses a pager.
+ls -> lists all the files and directories in a directory. The --block-size tag can be used to display the size of files
+find -> finds files in the directory hierarchy. The query can be optimized.
+make -> executes group of programs according to predefined rules. The -j tag can be used to specify the number of jobs to run simultaneously.
+g++ -> a c and c++ compiler. Same thing as gcc.
+
+

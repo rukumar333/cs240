@@ -1,0 +1,24 @@
+Enter a command: [New, View, Update, Deposit, Withdraw, Balance, Quit]
+Last Name: First Name: Age: Street Number: Street Name: Town: Zip Code: Balance: 
+Last Name: Kumar
+First Name: Rushil
+Age: 19
+Street Number: 6075
+Street Name: FreshPondRd
+Town: Maspeth
+Zip Code: 11378
+Balance: 100.00
+Enter a command: [New, View, Update, Deposit, Withdraw, Balance, Quit]
+Last Name: Kumar
+First Name: Rushil
+Age: 19
+Street Number: 6075
+Street Name: FreshPondRd
+Town: Maspeth
+Zip Code: 11378
+Balance: 100.00
+Enter a command: [New, View, Update, Deposit, Withdraw, Balance, Quit]
+Input Amount: Enter a command: [New, View, Update, Deposit, Withdraw, Balance, Quit]
+Kumar's balance: 110.01
+Enter a command: [New, View, Update, Deposit, Withdraw, Balance, Quit]
+Quitting

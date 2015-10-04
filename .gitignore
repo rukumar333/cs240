@@ -1,0 +1,9 @@
+# C++ files and compressed files
+*.o
+*.exe
+*.tar.gz
+*.tar
+
+# Directories to ignore
+class/
+hw/
