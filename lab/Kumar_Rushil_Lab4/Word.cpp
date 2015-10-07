@@ -3,6 +3,7 @@
 #include <iostream>
 
 Word::Word(){
+    std::cout << "Word Default Constructor" << std::endl;    
     text = NULL;
 }
 
@@ -11,39 +12,46 @@ Word::Word(char * word){
 }
 
 Word::Word(const Word &w1){
+    std::cout << "Word Copy Constructor" << std::endl;
     text = w1.text;
 }
 
 Word::~Word(){
-    delete[] text;
+    std::cout << "Word Destructor" << std::endl;
+    // delete[] text;
 }
 
-Word Word::operator+(const Word &w1){
-    
+Sentence Word::operator+(const Word &w1){
+    std::cout << "Word + Word" << std::endl;
 }
 
-Word Word::operator+(const Sentence &s1){
-    
+Sentence Word::operator+(const Sentence &s1){
+    std::cout << "Word + Sentence" << std::endl;
 }
 
 Word Word::operator+(const int &i){
-    
+    std::cout << "Word + 1 (all other ints should be ignored)" << std::endl;
 }
 
 Word Word::operator++(int){
-    
+    std::cout << "Word++" << std::endl;
+    return NULL;
 }
 
 Word Word::operator--(int){
-    
+    std::cout << "Word--" << std::endl;    
 }
 
 Word Word::operator++(){
-    
+    std::cout << "++Word" << std::endl;
 }
 
 Word Word::operator--(){
-    
+    std::cout << "Word--" << std::endl;
+}
+
+Word & Word::operator=(const Word &w1){
+    std::cout << "Word assignment operator used" << std::endl;
 }
 
 void Word::setText(char * word){
@@ -62,4 +70,8 @@ void Word::show(){
 	++i;
     }
     std::cout << std::endl;
+}
+
+std::ostream & operator<<(std::ostream & os, const Word &w1){
+    std::cout << "Bitshift for word used" << std::endl;
 }

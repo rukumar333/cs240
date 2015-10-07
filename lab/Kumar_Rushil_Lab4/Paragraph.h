@@ -15,7 +15,7 @@ class Paragraph{
     Paragraph(const Paragraph &s1);
     Paragraph operator+(const Paragraph &p1);
     Paragraph operator+(const Sentence &s1);
-    Paragraph operator+(const Story &s1);
+    Story operator+(const Story &s1);
     Paragraph operator+(const int &i);
     Paragraph operator++(int);
     Paragraph operator--(int);

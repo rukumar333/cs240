@@ -13,8 +13,8 @@ class Sentence{
     Sentence();
     ~Sentence();    
     Sentence(const Sentence &s1);
-    Sentence operator+(const Sentence &s1);
-    Sentence operator+(const Paragraph &p1);
+    Paragraph operator+(const Sentence &s1);
+    Paragraph operator+(const Paragraph &p1);
     Sentence operator+(const Word &p1);
     Sentence operator+(const int &i);
     Sentence operator++(int);

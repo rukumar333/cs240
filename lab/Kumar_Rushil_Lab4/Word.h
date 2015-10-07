@@ -10,8 +10,8 @@ class Word{
     Word(char * word);
     Word(const Word &w1);
     ~Word();
-    Word operator+(const Word &w1);
-    Word operator+(const Sentence &s1);
+    Sentence operator+(const Word &w1);
+    Sentence operator+(const Sentence &s1);
     Word operator+(const int &i);
     Word operator++(int);
     Word operator--(int);
