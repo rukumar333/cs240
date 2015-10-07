@@ -44,3 +44,8 @@ Sentence & Sentence::operator=(const Sentence &s1){
 void Sentence::show(){
     std::cout << "Sentence show used" << std::endl;
 }
+
+std::ostream & operator<<(std::ostream & os, const Sentence &s1){
+    std::cout << "Bitshift for Sentence used";
+    return os;
+}

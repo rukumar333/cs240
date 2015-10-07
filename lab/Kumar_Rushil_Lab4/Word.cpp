@@ -47,7 +47,7 @@ Word Word::operator++(){
 }
 
 Word Word::operator--(){
-    std::cout << "Word--" << std::endl;
+    std::cout << "--Word" << std::endl;
 }
 
 Word & Word::operator=(const Word &w1){
@@ -73,5 +73,6 @@ void Word::show(){
 }
 
 std::ostream & operator<<(std::ostream & os, const Word &w1){
-    std::cout << "Bitshift for word used" << std::endl;
+    std::cout << "Bitshift for word used";
+    return os;
 }

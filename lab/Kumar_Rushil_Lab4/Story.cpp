@@ -40,3 +40,8 @@ Story & Story::operator=(const Story &s1){
 void Story::show(){
     std::cout << "Story show used" << std::endl;
 }
+
+std::ostream & operator<<(std::ostream & os, const Story &s1){
+    std::cout << "Bitshift for story used";
+    return os;
+}

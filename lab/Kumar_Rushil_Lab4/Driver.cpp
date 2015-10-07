@@ -20,4 +20,7 @@ int main(){
     s2 = w2 + w4;
     p1 = (s1 + s2); 
     st1 = st1 + p2 + ((p1 + p1 + p1) + 1);
+    // Word w1;
+    // std::cout << w1 << std::endl;
+    // std::cout << "End of code" << std::endl;
 }

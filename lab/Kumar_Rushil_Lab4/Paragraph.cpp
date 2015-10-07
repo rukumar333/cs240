@@ -44,3 +44,8 @@ Paragraph & Paragraph::operator=(const Paragraph &p1){
 void Paragraph::show(){
     std::cout << "Paragraph show used" << std::endl;
 }
+
+std::ostream & operator<<(std::ostream & os, const Paragraph &p1){
+    std::cout << "Bitshift for paragraph used";
+    return os;
+}
