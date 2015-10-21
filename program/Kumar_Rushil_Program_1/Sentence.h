@@ -1,6 +1,6 @@
 #ifndef Sentence_H
 #define Sentence_H
-#include "./Word.h"
+#include "Word.h"
 
 class Paragraph;
 class Sentence{
@@ -10,6 +10,15 @@ class Sentence{
     /* 	Word val; */
     /* } */
  public:
+    struct Node_W{
+    public:
+	Word data;
+	Node_W * next;
+    };
+    Node_W * head;
+    Node_W * tail;
+    void prepend(Word w);
+    void append(Word w);
     Sentence();
     ~Sentence();    
     Sentence(const Sentence &s1);

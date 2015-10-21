@@ -1,22 +1,22 @@
 all:	make_exe
 
 make_exe:	story_obj
-	g++ Word.o Sentence.o Paragraph.o Story.o Driver.o -o Driver.exe
+	g++ -std=c++11 Word.o Sentence.o Paragraph.o Story.o Driver.o -o Driver.exe
 
 story_obj: 	paragraph_obj
-	g++ -c Story.cpp
+	g++ -std=c++11 -c Story.cpp
 
 paragraph_obj: 	sentence_obj
-	g++ -c Paragraph.cpp
+	g++ -c -std=c++11 Paragraph.cpp
 
 sentence_obj: 	word_obj
-	g++ -c Sentence.cpp
+	g++ -c -std=c++11 Sentence.cpp
 
 word_obj: 	driver_obj
-	g++ -c Word.cpp
+	g++ -c -std=c++11 Word.cpp
 
 driver_obj:
-	g++ -c Driver.cpp
+	g++ -c -std=c++11 Driver.cpp
 
 clean:
 	rm *.o *.exe

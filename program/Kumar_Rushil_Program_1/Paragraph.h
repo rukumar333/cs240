@@ -1,6 +1,6 @@
 #ifndef Paragraph_H
 #define Paragraph_H
-#include "./Sentence.h"
+#include "Sentence.h"
 
 class Story;
 class Paragraph{
@@ -10,6 +10,14 @@ class Paragraph{
     /* 	Word val; */
     /* } */
  public:
+    struct Node_H{
+	Sentence data;
+	Node_H * next;
+    };
+    Node_H * head;
+    Node_H * tail;
+    void prepend(Sentence);
+    void append(Sentence);
     Paragraph();
     ~Paragraph();    
     Paragraph(const Paragraph &s1);

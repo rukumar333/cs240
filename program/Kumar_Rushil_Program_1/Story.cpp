@@ -1,4 +1,4 @@
-#include "./Story.h"
+#include "Story.h"
 #include <iostream>
 
 Story::Story(){

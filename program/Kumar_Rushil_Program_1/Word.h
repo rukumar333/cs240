@@ -1,6 +1,7 @@
 #ifndef Word_H
 #define Word_H
 #include <iostream>
+#include <string>
 
 class Sentence;
 class Word{

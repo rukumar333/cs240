@@ -1,5 +1,5 @@
-#include "./Paragraph.h"
-#include "./Story.h"
+#include "Paragraph.h"
+#include "Story.h"
 #include <iostream>
 
 Paragraph::Paragraph(){

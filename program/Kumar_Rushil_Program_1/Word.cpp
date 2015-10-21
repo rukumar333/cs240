@@ -1,5 +1,5 @@
-#include "./Word.h"
-#include "./Sentence.h"
+#include "Word.h"
+#include "Sentence.h"
 #include <iostream>
 
 Word::Word(){
@@ -13,7 +13,15 @@ Word::Word(char * word){
 
 Word::Word(const Word &w1){
     std::cout << "Word Copy Constructor" << std::endl;
-    text = w1.text;
+    int sizeArray = sizeof(w1.text);
+    std::cout << sizeArray << std::endl;
+    text = new char[sizeArray];
+    for(unsigned int i = 0; i < sizeArray; i ++){
+	std::cout << text[i];
+    	// text[i] = w1.text[i];
+    }
+    // std::cout << "w";
+    delete[] w1.text;
 }
 
 Word::~Word(){
@@ -63,13 +71,14 @@ char * Word::getText(){
 }
 
 void Word::show(){
-    std::cout << "Text: " << std::endl;
     int i = 0;
+    std::cout << "Going to show " << std::endl;
+    std::cout << *(text + i) << std::endl;
     while(*(text + i) != '\0'){
-	std::cout << *(text + i);
-	++i;
+    	std::cout << *(text + i);
+    	++i;
     }
-    std::cout << std::endl;
+    std::cout << "Showed" << std::endl;
 }
 
 std::ostream & operator<<(std::ostream & os, const Word &w1){

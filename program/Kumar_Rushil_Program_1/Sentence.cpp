@@ -1,5 +1,5 @@
-#include "./Sentence.h"
-#include "./Paragraph.h"
+#include "Sentence.h"
+#include "Paragraph.h"
 #include <iostream>
 
 Sentence::Sentence(){
@@ -41,8 +41,28 @@ Sentence Sentence::operator--(){
 Sentence & Sentence::operator=(const Sentence &s1){
     std::cout << "Sentence assignment operator" << std::endl;     
 }
+
+void Sentence::append(Word w){
+    Node_W* node = new Node_W();
+    node->data = w;
+    node->next = head;
+    head = node;
+}
+
+void Sentence::prepend(Word w){
+    Node_W* node = new Node_W();
+    node->data = w;
+    tail->next = node;
+    tail = node;
+}
+
 void Sentence::show(){
-    std::cout << "Sentence show used" << std::endl;
+    Node_W* iterator = head;    
+    while(iterator != nullptr){
+	iterator->data.show();
+	std::cout << " ";
+	iterator = iterator->next;
+    }
 }
 
 std::ostream & operator<<(std::ostream & os, const Sentence &s1){
