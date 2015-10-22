@@ -18,6 +18,7 @@ int main(){
     	    if(isspace(c)){
 		++i;		
     		sentence.append(word);
+		word.~Word();
     		word = Word(charArray + i);
     	    }	       
     	}

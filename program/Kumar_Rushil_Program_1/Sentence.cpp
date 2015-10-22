@@ -4,12 +4,21 @@
 
 Sentence::Sentence(){
     std::cout << "Sentence Default constructor" << std::endl;
-    head = NULL;
-    tail = NULL;
+    // head = NULL;
+    // tail = NULL;
 }
 
 Sentence::~Sentence(){
     std::cout << "Sentence destructor" << std::endl;
+    Node_W * iterator = head;
+    Node_W * tempPointer = head;
+    while(iterator != nullptr){
+	// iterator->data.~Word();
+	std::cout << "Deleting" << std::endl;
+	iterator = iterator->next;
+	delete tempPointer;	
+	tempPointer = iterator;
+    }
 }    
 
 Sentence::Sentence(const Sentence &s1){
@@ -48,7 +57,7 @@ void Sentence::append(Word w){
     std::cout << "APPENDING" << std::endl;
     Node_W* node = new Node_W();
     node->data = w;
-    node->next = NULL;
+    // node->next = NULL;
     if(head == NULL && tail == NULL){
 	head = node;
 	tail = node;
@@ -61,8 +70,13 @@ void Sentence::append(Word w){
 void Sentence::prepend(Word w){
     Node_W* node = new Node_W();
     node->data = w;
-    node->next = head;
-    head = node;
+    if(head == NULL && tail == NULL){
+	head = node;
+	tail = node;
+    }else{
+	node->next = head;
+	head = node;
+    }
 }
 
 void Sentence::show(){

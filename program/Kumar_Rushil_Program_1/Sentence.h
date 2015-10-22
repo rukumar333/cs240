@@ -13,10 +13,10 @@ class Sentence{
     struct Node_W{
     public:
 	Word data;
-	Node_W * next;
+	Node_W * next = NULL;
     };
-    Node_W * head;
-    Node_W * tail;
+    Node_W * head = NULL;
+    Node_W * tail = NULL;
     void prepend(Word w);
     void append(Word w);
     Sentence();

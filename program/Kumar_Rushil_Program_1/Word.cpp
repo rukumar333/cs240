@@ -38,7 +38,6 @@ Word::Word(char * word){
 Word::Word(const Word &w1){
     std::cout << "Word Copy Constructor" << std::endl;
     text = copyArray(w1.text);    
-    // delete[] w1.text;
 }
 
 Word::~Word(){
@@ -60,7 +59,6 @@ Word Word::operator+(const int &i){
 
 Word Word::operator++(int){
     std::cout << "Word++" << std::endl;
-    return NULL;
 }
 
 Word Word::operator--(int){
