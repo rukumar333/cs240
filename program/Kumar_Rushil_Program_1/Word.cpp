@@ -2,31 +2,48 @@
 #include "Sentence.h"
 #include <iostream>
 
+char * copyArray(char * input){
+    int i = 0;
+    int length = 0;
+    if(input != nullptr){
+	while(*(input + i) != '\0' && *(input + i) != ' '){
+	    // std::cout << *(input + i) << std::endl;
+	    ++length;
+	    ++i;
+	}
+	char * output = new char[length];
+	i = 0;
+	while(i < length){
+	    *(output + i) = *(input + i);	
+	    ++i;
+	}
+	i = 0;	
+	return output;
+    }else{
+	return nullptr;
+    }
+}
+
 Word::Word(){
     std::cout << "Word Default Constructor" << std::endl;    
     text = NULL;
 }
 
 Word::Word(char * word){
-    text = word;
+    std::cout << "Constructor with char*" << std::endl;
+    text = copyArray(word);
+    int i = 0;
 }
 
 Word::Word(const Word &w1){
     std::cout << "Word Copy Constructor" << std::endl;
-    int sizeArray = sizeof(w1.text);
-    std::cout << sizeArray << std::endl;
-    text = new char[sizeArray];
-    for(unsigned int i = 0; i < sizeArray; i ++){
-	std::cout << text[i];
-    	// text[i] = w1.text[i];
-    }
-    // std::cout << "w";
-    delete[] w1.text;
+    text = copyArray(w1.text);    
+    // delete[] w1.text;
 }
 
 Word::~Word(){
     std::cout << "Word Destructor" << std::endl;
-    // delete[] text;
+    delete[] text;
 }
 
 Sentence Word::operator+(const Word &w1){
@@ -60,10 +77,11 @@ Word Word::operator--(){
 
 Word & Word::operator=(const Word &w1){
     std::cout << "Word assignment operator used" << std::endl;
+    text = copyArray(w1.text);
 }
 
 void Word::setText(char * word){
-    text = word;
+    text = copyArray(word);
 }
 
 char * Word::getText(){
@@ -72,13 +90,10 @@ char * Word::getText(){
 
 void Word::show(){
     int i = 0;
-    std::cout << "Going to show " << std::endl;
-    std::cout << *(text + i) << std::endl;
-    while(*(text + i) != '\0'){
+    while(*(text + i) != '\0'){	
     	std::cout << *(text + i);
     	++i;
     }
-    std::cout << "Showed" << std::endl;
 }
 
 std::ostream & operator<<(std::ostream & os, const Word &w1){

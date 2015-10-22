@@ -4,6 +4,8 @@
 
 Sentence::Sentence(){
     std::cout << "Sentence Default constructor" << std::endl;
+    head = NULL;
+    tail = NULL;
 }
 
 Sentence::~Sentence(){
@@ -43,25 +45,39 @@ Sentence & Sentence::operator=(const Sentence &s1){
 }
 
 void Sentence::append(Word w){
+    std::cout << "APPENDING" << std::endl;
+    Node_W* node = new Node_W();
+    node->data = w;
+    node->next = NULL;
+    if(head == NULL && tail == NULL){
+	head = node;
+	tail = node;
+    }else{
+	tail->next = node;
+	tail = node;	
+    }
+}
+
+void Sentence::prepend(Word w){
     Node_W* node = new Node_W();
     node->data = w;
     node->next = head;
     head = node;
 }
 
-void Sentence::prepend(Word w){
-    Node_W* node = new Node_W();
-    node->data = w;
-    tail->next = node;
-    tail = node;
-}
-
 void Sentence::show(){
+    std::cout << "Sentence showing" << std::endl;
     Node_W* iterator = head;    
     while(iterator != nullptr){
-	iterator->data.show();
-	std::cout << " ";
-	iterator = iterator->next;
+	if(iterator == tail){
+	    iterator->data.show();
+	    std::cout << ". ";
+	    iterator = iterator->next;   	    
+	}else{
+	    iterator->data.show();
+	    std::cout << " ";
+	    iterator = iterator->next;   
+	}
     }
 }
 
