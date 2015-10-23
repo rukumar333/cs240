@@ -6,18 +6,18 @@ char * copyArray(char * input){
     int i = 0;
     int length = 0;
     if(input != nullptr){
-	while(*(input + i) != '\0' && *(input + i) != ' '){
+	while(*(input + i) != '\0' && *(input + i) != ' ' && *(input + i) != '\n'){
 	    // std::cout << *(input + i) << std::endl;
 	    ++length;
 	    ++i;
-	}
+	}	
 	char * output = new char[length];
+	*(output + i) = '\0';
 	i = 0;
 	while(i < length){
-	    *(output + i) = *(input + i);	
+	    *(output + i) = *(input + i);
 	    ++i;
-	}
-	i = 0;	
+	}	
 	return output;
     }else{
 	return nullptr;
@@ -25,14 +25,13 @@ char * copyArray(char * input){
 }
 
 Word::Word(){
-    std::cout << "Word Default Constructor" << std::endl;    
+    // std::cout << "Word Default Constructor" << std::endl;    
     text = NULL;
 }
 
 Word::Word(char * word){
     std::cout << "Constructor with char*" << std::endl;
     text = copyArray(word);
-    int i = 0;
 }
 
 Word::Word(const Word &w1){
@@ -41,16 +40,16 @@ Word::Word(const Word &w1){
 }
 
 Word::~Word(){
-    std::cout << "Word Destructor" << std::endl;
+    // std::cout << "Word Destructor" << std::endl;
     delete[] text;
 }
 
 Sentence Word::operator+(const Word &w1){
-    std::cout << "Word + Word" << std::endl;
+    // std::cout << "Word + Word" << std::endl;
 }
 
 Sentence Word::operator+(const Sentence &s1){
-    std::cout << "Word + Sentence" << std::endl;
+    // std::cout << "Word + Sentence" << std::endl;
 }
 
 Word Word::operator+(const int &i){
@@ -92,6 +91,7 @@ void Word::show(){
     	std::cout << *(text + i);
     	++i;
     }
+    // std::cout << " ";
 }
 
 std::ostream & operator<<(std::ostream & os, const Word &w1){

@@ -55,6 +55,7 @@ Sentence & Sentence::operator=(const Sentence &s1){
 
 void Sentence::append(Word w){
     std::cout << "APPENDING" << std::endl;
+    
     Node_W* node = new Node_W();
     node->data = w;
     // node->next = NULL;
@@ -65,6 +66,12 @@ void Sentence::append(Word w){
 	tail->next = node;
 	tail = node;	
     }
+    char * iterator = w.getText();
+    while(*iterator != '\0'){
+	std::cout << *(iterator);
+	++iterator;
+    }
+    std::cout << std::endl << "Leaving appending function" << std::endl;
 }
 
 void Sentence::prepend(Word w){
