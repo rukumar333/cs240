@@ -34,7 +34,10 @@ Story Story::operator+(const Story &s1){
     std::cout << "Story + Story" << std::endl;
 }
 Story Story::operator+(const Paragraph &p1){
-    std::cout << "Story + Paragraph" << std::endl;    
+    std::cout << "Story + Paragraph" << std::endl;
+    Story temp = *this;
+    temp.append(p1);
+    return temp;
 }
 Story Story::operator+(const int &i){
     std::cout << "Story + 1 (all other ints should be ignored)" << std::endl; 

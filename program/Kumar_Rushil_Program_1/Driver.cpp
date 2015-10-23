@@ -45,14 +45,14 @@ int main(){
 		if(next == ' ' || next == '\t' || next == '\n'){
 		    
 		}else{
-		    std::cout << "SPACED" << std::endl;
-		    std::cout << "SHOWING SENTENCE" << std::endl;
-		    sentence.show();
+		    // std::cout << "SPACED" << std::endl;
+		    // std::cout << "SHOWING SENTENCE" << std::endl;
+		    // sentence.show();
 		    sentence = sentence + word;
-		    std::cout << "SHOWING WORD" << std::endl;
-		    word.show();
-		    std::cout << "SHOWING SENTENCE" << std::endl;
-		    sentence.show();
+		    // std::cout << "SHOWING WORD" << std::endl;
+		    // word.show();
+		    // std::cout << "SHOWING SENTENCE" << std::endl;
+		    // sentence.show();
 		    delete[] word.text;
 		    word = Word(charArray + i + 1);   
 		}
@@ -64,14 +64,16 @@ int main(){
     		delete[] word.text;
     		word = Word(charArray + i + 1 + 1);
 		++i;
-		std::cout << "PERIOD" << std::endl;
-		sentence.show();
-    	    	paragraph.append(sentence);
+		// std::cout << "PERIOD" << std::endl;
+		// sentence.show();
+    	    	// paragraph.append(sentence);
+		paragraph = paragraph + sentence;
     		sentence.~Sentence();
     		sentence = Sentence();
     	    }
     	    if(c == '\t'){
-		story.append(paragraph);
+		// story.append(paragraph);
+		story = story + paragraph;
 		paragraph.~Paragraph();
 		paragraph = Paragraph();
     		sentence.~Sentence();
@@ -79,30 +81,13 @@ int main(){
 		word = Word(charArray + i + 1);
     	    }
 	    if(*(charArray + i + 1) == '\0'){
-		story.append(paragraph);
+		// story.append(paragraph);
+		story = story + paragraph;
 		paragraph.~Paragraph();
 		paragraph = Paragraph();		
 	    }
-    	    // if(c == '\n'){		
-    	    // }
     	}
     	++i;	
     }        
     story.show();
-    // paragraph.show();
-    // Paragraph p = paragraph;
-    // p.show();
-    // while(charArray[i] != '\0'){
-    // 	char c = charArray[i];	
-    // 	if(i == 0){
-    // 	    word = Word(charArray + i);
-    // 	}else{
-    // 	    if(isspace(c)){
-    // 		sentence.append(word);
-    // 		word.~Word();
-    // 		word = Word(charArray + i + 1);
-    // 	    }	       
-    // 	}
-    // 	++i;
-    // }
 }

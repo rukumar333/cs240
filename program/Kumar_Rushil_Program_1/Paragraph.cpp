@@ -33,6 +33,9 @@ Paragraph::Paragraph(const Paragraph &p1){
 
 Paragraph Paragraph::operator+(const Sentence &s1){
     std::cout << "Paragraph + Sentence" << std::endl;
+    Paragraph temp = *this;
+    temp.append(s1);
+    return temp;
 }
 Paragraph Paragraph::operator+(const Paragraph &p1){
     std::cout << "Paragraph + Paragraph" << std::endl;    
