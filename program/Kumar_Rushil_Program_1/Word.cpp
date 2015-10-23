@@ -31,12 +31,12 @@ Word::Word(){
 }
 
 Word::Word(char * word){
-    std::cout << "Constructor with char*" << std::endl;
+    // std::cout << "Constructor with char*" << std::endl;
     text = copyArray(word);
 }
 
 Word::Word(const Word &w1){
-    std::cout << "Word Copy Constructor" << std::endl;
+    // std::cout << "Word Copy Constructor" << std::endl;
     text = copyArray(w1.text);    
 }
 
@@ -76,7 +76,7 @@ Word Word::operator--(){
 }
 
 Word & Word::operator=(const Word &w1){
-    std::cout << "Word assignment operator used" << std::endl;
+    // std::cout << "Word assignment operator used" << std::endl;
     text = copyArray(w1.text);
 }
 
@@ -98,6 +98,11 @@ void Word::show(){
 }
 
 std::ostream & operator<<(std::ostream & os, const Word &w1){
-    std::cout << "Bitshift for word used";
+    // std::cout << "Bitshift for word used";
+    // int i = 0;
+    // char * text = w1.text;
+    // while(*(text + i) != '\0'){	
+    os << w1.text;
+    // }
     return os;
 }

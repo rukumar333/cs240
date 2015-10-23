@@ -3,6 +3,11 @@
 #include "Word.h"
 
 class Paragraph;
+struct Node_W{
+public:
+    Word data;
+    Node_W * next = NULL;
+};
 class Sentence{
     /* class NodeW{ */
     /* public: */
@@ -10,11 +15,6 @@ class Sentence{
     /* 	Word val; */
     /* } */
  public:
-    struct Node_W{
-    public:
-	Word data;
-	Node_W * next = NULL;
-    };
     Node_W * head = NULL;
     Node_W * tail = NULL;
     void prepend(const Word &w);
@@ -33,6 +33,6 @@ class Sentence{
     Sentence & operator=(const Sentence &s1);
     void show();
     void reinit();
+    friend std::ostream & operator<<(std::ostream & os, const Sentence &s1);
 };
-std::ostream &operator << (std::ostream& os, const Sentence& s1);
 #endif

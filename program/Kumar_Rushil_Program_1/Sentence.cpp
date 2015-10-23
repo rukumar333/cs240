@@ -3,11 +3,11 @@
 #include <iostream>
 
 Sentence::Sentence(){
-    std::cout << "Sentence Default constructor" << std::endl;
+    // std::cout << "Sentence Default constructor" << std::endl;
 }
 
 Sentence::~Sentence(){
-    std::cout << "Sentence destructor" << std::endl;
+    // std::cout << "Sentence destructor" << std::endl;
     // std::cout << this << std::endl;
     // this->show();
     Node_W * iterator = head;
@@ -32,20 +32,6 @@ Sentence::Sentence(const Sentence &s1){
     }
 }
 
-void Sentence::reinit(){
-    Node_W * iterator = head;
-    Node_W * tempPointer = head;
-    while(iterator){
-	iterator = iterator->next;
-	std::cout << "HERE deleting" << std::endl;
-	delete tempPointer;	
-	std::cout << "FINISHED deleting" << std::endl;
-	tempPointer = iterator;
-    }
-    head = NULL;
-    tail = NULL;
-}
-
 Paragraph Sentence::operator+(const Sentence &s1){
     std::cout << "Sentence + Sentence" << std::endl;
 }
@@ -53,7 +39,7 @@ Paragraph Sentence::operator+(const Paragraph &p1){
     std::cout << "Sentence + Paragraph" << std::endl;    
 }
 Sentence Sentence::operator+(const Word &p1){    
-    std::cout << "Sentence + Word" << std::endl;
+    // std::cout << "Sentence + Word" << std::endl;
     Sentence temp = *this;
     temp.append(p1);
     return temp;
@@ -74,7 +60,7 @@ Sentence Sentence::operator--(){
     std::cout << "--Sentence" << std::endl;     
 }
 Sentence & Sentence::operator=(const Sentence &s1){
-    std::cout << "Sentence assignment operator" << std::endl;
+    // std::cout << "Sentence assignment operator" << std::endl;
     this->head = NULL;
     this->tail = NULL;
     Node_W * iterator = s1.head;
@@ -130,6 +116,16 @@ void Sentence::show(){
 }
 
 std::ostream & operator<<(std::ostream & os, const Sentence &s1){
-    std::cout << "Bitshift for Sentence used";
+    Node_W* iterator = s1.head;
+    while(iterator != nullptr){
+	if(iterator == s1.tail){
+	    os << iterator->data;
+	    iterator = iterator->next;
+	}else{
+	    os << iterator->data;
+	    os << " ";
+	    iterator = iterator->next;   
+	}
+    }
     return os;
 }

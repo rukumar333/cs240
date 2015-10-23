@@ -3,15 +3,14 @@
 #include <iostream>
 
 Paragraph::Paragraph(){
-    std::cout << "Paragraph Default constructor" << std::endl;
+    // std::cout << "Paragraph Default constructor" << std::endl;
 }
 
 Paragraph::~Paragraph(){
-    std::cout << "Paragraph destructor" << std::endl;
+    // std::cout << "Paragraph destructor" << std::endl;
     Node_S * iterator = head;
     Node_S * tempPointer = head;
     while(iterator != nullptr){
-	std::cout << "Deleting" << std::endl;
 	iterator = iterator->next;
 	delete tempPointer;	
 	tempPointer = iterator;
@@ -19,7 +18,7 @@ Paragraph::~Paragraph(){
 }    
 
 Paragraph::Paragraph(const Paragraph &p1){
-    std::cout << "Paragraph copy constructor" << std::endl;
+    // std::cout << "Paragraph copy constructor" << std::endl;
     Node_S * iterator = p1.head;
     if(!iterator){
 	head = NULL;
@@ -32,7 +31,7 @@ Paragraph::Paragraph(const Paragraph &p1){
 }
 
 Paragraph Paragraph::operator+(const Sentence &s1){
-    std::cout << "Paragraph + Sentence" << std::endl;
+    // std::cout << "Paragraph + Sentence" << std::endl;
     Paragraph temp = *this;
     temp.append(s1);
     return temp;
@@ -59,7 +58,7 @@ Paragraph Paragraph::operator--(){
     std::cout << "--Paragraph" << std::endl;     
 }
 Paragraph & Paragraph::operator=(const Paragraph &p1){
-    std::cout << "Paragraph assignment operator" << std::endl;
+    // std::cout << "Paragraph assignment operator" << std::endl;
     this->head = NULL;
     this->tail = NULL;
     Node_S * iterator = p1.head;
@@ -74,7 +73,7 @@ Paragraph & Paragraph::operator=(const Paragraph &p1){
 }
 
 void Paragraph::append(const Sentence &s){
-    std::cout << "APPENDING PARAGRAPH" << std::endl;
+    // std::cout << "APPENDING PARAGRAPH" << std::endl;
     Node_S* node = new Node_S();
     node->data = s;
     if(head == NULL && tail == NULL){
@@ -116,6 +115,17 @@ void Paragraph::show(){
 }
 
 std::ostream & operator<<(std::ostream & os, const Paragraph &p1){
-    std::cout << "Bitshift for paragraph used";
+    Node_S* iterator = p1.head;
+    while(iterator != nullptr){
+	if(iterator == p1.tail){
+	    os << iterator->data;
+	    os << "\n";
+	    iterator = iterator->next;   	    
+	}else{
+	    os << iterator->data;
+	    os << " ";
+	    iterator = iterator->next;   
+	}
+    }
     return os;
 }

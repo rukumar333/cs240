@@ -22,6 +22,6 @@ class Word{
     char * getText();
     void setText(char * word);
     void show();
+    friend std::ostream & operator<<(std::ostream & os, const Word &w1);
 };
-std::ostream &operator << (std::ostream& os, const Word& w1);
 #endif
