@@ -5,8 +5,8 @@
 
 class Sentence;
 class Word{
-    char * text;
  public:
+    char * text;
     Word();
     Word(char * word);
     Word(const Word &w1);

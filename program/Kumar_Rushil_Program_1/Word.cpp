@@ -6,7 +6,8 @@ char * copyArray(char * input){
     int i = 0;
     int length = 0;
     if(input != nullptr){
-	while(*(input + i) != '\0' && *(input + i) != ' ' && *(input + i) != '\n'){
+	// while(*(input + i) != '\0' && *(input + i) != ' ' && *(input + i) != '.' && *(input + i) != '\t' && *(input + i) != '\n'){
+	while(*(input + i) != '\0' && *(input + i) != ' ' && *(input + i) != '\t' && *(input + i) != '\n'){
 	    // std::cout << *(input + i) << std::endl;
 	    ++length;
 	    ++i;
@@ -41,7 +42,9 @@ Word::Word(const Word &w1){
 
 Word::~Word(){
     // std::cout << "Word Destructor" << std::endl;
-    delete[] text;
+    if(text != nullptr){
+	delete[] text;	
+    }
 }
 
 Sentence Word::operator+(const Word &w1){

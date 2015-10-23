@@ -17,8 +17,8 @@ class Sentence{
     };
     Node_W * head = NULL;
     Node_W * tail = NULL;
-    void prepend(Word w);
-    void append(Word w);
+    void prepend(const Word &w);
+    void append(const Word &w);
     Sentence();
     ~Sentence();    
     Sentence(const Sentence &s1);
@@ -32,6 +32,7 @@ class Sentence{
     Sentence operator--();
     Sentence & operator=(const Sentence &s1);
     void show();
+    void reinit();
 };
 std::ostream &operator << (std::ostream& os, const Sentence& s1);
 #endif

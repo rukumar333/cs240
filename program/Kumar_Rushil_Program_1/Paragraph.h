@@ -10,14 +10,15 @@ class Paragraph{
     /* 	Word val; */
     /* } */
  public:
-    struct Node_H{
+    struct Node_S{
+    public:
 	Sentence data;
-	Node_H * next;
+	Node_S * next = NULL;
     };
-    Node_H * head;
-    Node_H * tail;
-    void prepend(Sentence);
-    void append(Sentence);
+    Node_S * head = NULL;
+    Node_S * tail = NULL;
+    void prepend(const Sentence &s);
+    void append(const Sentence &s);
     Paragraph();
     ~Paragraph();    
     Paragraph(const Paragraph &s1);

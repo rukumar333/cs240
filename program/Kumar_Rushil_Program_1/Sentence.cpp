@@ -4,17 +4,16 @@
 
 Sentence::Sentence(){
     std::cout << "Sentence Default constructor" << std::endl;
-    // head = NULL;
-    // tail = NULL;
 }
 
 Sentence::~Sentence(){
     std::cout << "Sentence destructor" << std::endl;
+    // std::cout << this << std::endl;
+    // this->show();
     Node_W * iterator = head;
     Node_W * tempPointer = head;
-    while(iterator != nullptr){
-	// iterator->data.~Word();
-	std::cout << "Deleting" << std::endl;
+    // std::cout << iterator << std::endl;
+    while(iterator){
 	iterator = iterator->next;
 	delete tempPointer;	
 	tempPointer = iterator;
@@ -22,7 +21,29 @@ Sentence::~Sentence(){
 }    
 
 Sentence::Sentence(const Sentence &s1){
-    std::cout << "Sentence copy constructor" << std::endl;
+    Node_W * iterator = s1.head;
+    if(!iterator){
+	head = NULL;
+	tail = NULL;
+    }
+    while(iterator != nullptr){
+	this->append(iterator->data);
+	iterator = iterator->next;
+    }
+}
+
+void Sentence::reinit(){
+    Node_W * iterator = head;
+    Node_W * tempPointer = head;
+    while(iterator){
+	iterator = iterator->next;
+	std::cout << "HERE deleting" << std::endl;
+	delete tempPointer;	
+	std::cout << "FINISHED deleting" << std::endl;
+	tempPointer = iterator;
+    }
+    head = NULL;
+    tail = NULL;
 }
 
 Paragraph Sentence::operator+(const Sentence &s1){
@@ -31,8 +52,11 @@ Paragraph Sentence::operator+(const Sentence &s1){
 Paragraph Sentence::operator+(const Paragraph &p1){
     std::cout << "Sentence + Paragraph" << std::endl;    
 }
-Sentence Sentence::operator+(const Word &p1){
-    std::cout << "Sentence + Word" << std::endl;        
+Sentence Sentence::operator+(const Word &p1){    
+    std::cout << "Sentence + Word" << std::endl;
+    Sentence temp = *this;
+    temp.append(p1);
+    return temp;
 }
 Sentence Sentence::operator+(const int &i){
     std::cout << "Sentence + 1 (all other ints should be ignored)" << std::endl; 
@@ -50,15 +74,24 @@ Sentence Sentence::operator--(){
     std::cout << "--Sentence" << std::endl;     
 }
 Sentence & Sentence::operator=(const Sentence &s1){
-    std::cout << "Sentence assignment operator" << std::endl;     
+    std::cout << "Sentence assignment operator" << std::endl;
+    this->head = NULL;
+    this->tail = NULL;
+    Node_W * iterator = s1.head;
+    if(!iterator){
+	head = NULL;
+	tail = NULL;
+    }
+    while(iterator){
+	this->append(iterator->data);
+	iterator = iterator->next;
+    }
+    return *this;
 }
 
-void Sentence::append(Word w){
-    std::cout << "APPENDING" << std::endl;
-    
+void Sentence::append(const Word &w){
     Node_W* node = new Node_W();
     node->data = w;
-    // node->next = NULL;
     if(head == NULL && tail == NULL){
 	head = node;
 	tail = node;
@@ -66,15 +99,9 @@ void Sentence::append(Word w){
 	tail->next = node;
 	tail = node;	
     }
-    char * iterator = w.getText();
-    while(*iterator != '\0'){
-	std::cout << *(iterator);
-	++iterator;
-    }
-    std::cout << std::endl << "Leaving appending function" << std::endl;
 }
 
-void Sentence::prepend(Word w){
+void Sentence::prepend(const Word &w){
     Node_W* node = new Node_W();
     node->data = w;
     if(head == NULL && tail == NULL){
@@ -87,12 +114,12 @@ void Sentence::prepend(Word w){
 }
 
 void Sentence::show(){
-    std::cout << "Sentence showing" << std::endl;
+    int i = 0;
     Node_W* iterator = head;    
     while(iterator != nullptr){
+	++i;
 	if(iterator == tail){
 	    iterator->data.show();
-	    std::cout << ". ";
 	    iterator = iterator->next;   	    
 	}else{
 	    iterator->data.show();
