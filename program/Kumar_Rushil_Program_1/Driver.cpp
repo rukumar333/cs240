@@ -12,11 +12,11 @@ int main(){
     // Word w = Word(charArray);
     // Sentence s;
     // s = s + w;
-
-    // Story story = Story("outstory.txt");
-    Story story = Story("input.txt");
+    Story story = Story("STORIES/Brady.txt");
+    // Story story = Story("STORIES/FreshPrince.txt");
+    // Story story = Story("STORIES/Gilligan.txt");
     story.show();
-    // story.save("outstory.txt");
+    story.save("outstory.txt");
     
     // std::ifstream file("input.txt");
     // std::string input((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());

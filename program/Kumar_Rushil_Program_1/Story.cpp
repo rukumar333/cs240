@@ -202,6 +202,7 @@ std::ostream & operator<<(std::ostream & os, const Story &s1){
 	    os << "\t";
 	    os << iterator->data;
 	    iterator = iterator->next;
+	    os << "\n";
 	}else{
 	    os << "\t";
 	    os << iterator->data;

@@ -119,6 +119,7 @@ std::ostream & operator<<(std::ostream & os, const Paragraph &p1){
     while(iterator != nullptr){
 	if(iterator == p1.tail){
 	    os << iterator->data;
+	    os << " ";
 	    os << "\n";
 	    iterator = iterator->next;   	    
 	}else{
