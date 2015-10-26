@@ -4,6 +4,7 @@ using namespace std;
 #include <cstdlib>
 
 #include "Sorter.h"
+#include "TSorter.h"
 
 #define DEFAULT_NUMVALUES 10
 #define MAX_NUMVALUES 1000
