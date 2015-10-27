@@ -20,6 +20,14 @@ class TSorter{
 	elements.push_back(value);
     };
 
+    void shuffle(){	
+	unsigned int j; 
+	for (unsigned int i=1; i < elements.size(); i++) {
+	    j = rand() % i; 
+	    swap(elements.begin() + i, elements.begin() + j); 
+	}
+    };
+
     template<typename Iterator>
     /* void swap(vector<T>::iterator i, vector<T>::iterator j){ */
     void swap(Iterator i, Iterator j){
@@ -42,9 +50,6 @@ class TSorter{
 	}
 	cout << endl;
     };
-
-    // "Shuffle" the array elements
-    void shuffle();
 
     // These are the functions you should implement for Lab 5
     // You should keep these interfaces the same, but you may add
@@ -76,17 +81,102 @@ class TSorter{
 	    -- count;
 	}
     };
-    void bubbleSortI();     
-    void insertionSortR(); 
-    void selectionSortR();	
-    void bubbleSortR();
+    void bubbleSortI(){
+	typename vector<T>::iterator count = elements.end();
+	for(typename vector<T>::iterator it = elements.begin(); it != elements.end(); ++it){
+	    for(typename vector<T>::iterator ik = elements.begin(); ik != count - 1; ++ik){
+		if(*ik > *(ik + 1)){
+		    swap(ik, ik + 1);
+		}
+	    }
+	}
+    };
 
-    void insertionForwardR(int i);
-    void insertionBackR(int i);
+    void insertionSortR(){
+	insertionForwardR(elements.begin());
+    };
 
-    int selectionGetLargestR(int currentPos, int count, T large, int largeP);
-    void selectionInnerR(int currentPos, int count);
+    template<typename Iterator>
+    void insertionForwardR(Iterator currentPos){
+	if(currentPos == elements.end()){
+	    return;
+	}else{
+	    insertionBackR(currentPos);
+	    ++ currentPos;
+	    insertionForwardR(currentPos);
+	}
+    };
 
-    void bubbleOuterR(int currentPos);
-    void bubbleInnerR(int currentPos);
+    template<typename Iterator>
+    void insertionBackR(Iterator currentPos){
+	if(currentPos == elements.begin()){
+	    return;
+	}else{
+	    if(*currentPos < *(currentPos - 1)){
+		swap(currentPos, currentPos - 1);
+	    }
+	    -- currentPos;
+	    insertionBackR(currentPos);
+	}
+    };
+
+    void selectionSortR(){
+	selectionInnerR(elements.begin(), elements.end());
+    };
+
+    template<typename Iterator>
+    void selectionInnerR(Iterator currentPos, Iterator count){
+	if(currentPos == elements.end()){
+	    return;
+	}else{
+	    typename vector<T>::iterator largeP = selectionGetLargestR(elements.begin(), count, *(elements.begin()), elements.begin());
+	    swap(largeP, count - 1);
+	    -- count;
+	    ++ currentPos;
+	    selectionInnerR(currentPos, count);
+	}
+    };
+
+    template<typename Iterator>
+    Iterator selectionGetLargestR(Iterator currentPos, Iterator count, T large, Iterator largeP){
+	if(currentPos == count){
+	    return largeP;
+	}else{
+	    if(large < *currentPos){
+		large = *currentPos;
+		largeP = currentPos;		
+	    }
+	    ++ currentPos;
+	    return selectionGetLargestR(currentPos, count, large, largeP);
+	}
+    }
+
+    void bubbleSortR(){
+	bubbleOuterR(elements.begin());
+    };
+
+    template<typename Iterator>
+    void bubbleOuterR(Iterator currentPos){
+	if(currentPos == elements.end()){
+	    return;
+	}else{
+	    bubbleInnerR(elements.begin());
+	    ++ currentPos;
+	    bubbleOuterR(currentPos);
+	}
+    };
+
+    template<typename Iterator>
+    void bubbleInnerR(Iterator currentPos){
+	if(currentPos == (elements.end() - 1)){
+	    return;
+	}else{
+	    if(*currentPos > *(currentPos + 1)){
+		swap(currentPos, currentPos + 1);		
+	    }
+	    ++ currentPos;
+	    bubbleInnerR(currentPos);
+	}
+    };
+
 };

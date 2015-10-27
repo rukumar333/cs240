@@ -1,15 +1,14 @@
 #include <iostream>
 using namespace std;
-
 #include <cstdlib>
 
 class Sorter {
-   private:
-      int *array; 
-      unsigned int numElements;
-      unsigned int capacity;
+ private:
+    int *array; 
+    unsigned int numElements;
+    unsigned int capacity;
 
-      void swap(int i, int j); 
+    void swap(int i, int j); 
 
   public:
       Sorter();
