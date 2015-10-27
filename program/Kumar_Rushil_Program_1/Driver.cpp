@@ -8,13 +8,18 @@
 #include <ctype.h>
 
 int main(){
-    // char charrArray[] = "Hello world";
-    // Word w = Word(charArray);
+    // char charArray[] = "Hello world";
+    // Word* w = new Word(charArray);
     // Sentence s;
-    // s = s + w;
+    // Paragraph p;
+    // s = s + *w;
+    // s = s + *w;
+    // delete w;
+    // s.show();
+
     Story story = Story("STORIES/Brady.txt");
-    // Story story = Story("STORIES/FreshPrince.txt");
-    // Story story = Story("STORIES/Gilligan.txt");
+    // // Story story = Story("STORIES/FreshPrince.txt");
+    // // Story story = Story("STORIES/Gilligan.txt");
     story.show();
     story.save("outstory.txt");
     

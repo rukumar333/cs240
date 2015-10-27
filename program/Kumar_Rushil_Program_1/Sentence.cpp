@@ -18,6 +18,8 @@ Sentence::~Sentence(){
 	delete tempPointer;	
 	tempPointer = iterator;
     }
+    head = NULL;
+    tail = NULL;    
 }    
 
 Sentence::Sentence(const Sentence &s1){
@@ -61,15 +63,16 @@ Sentence Sentence::operator--(){
 }
 Sentence & Sentence::operator=(const Sentence &s1){
     // std::cout << "Sentence assignment operator" << std::endl;
-    this->head = NULL;
-    this->tail = NULL;
+    this->~Sentence();
+    // this->head = NULL;
+    // this->tail = NULL;
     Node_W * iterator = s1.head;
     if(!iterator){
 	head = NULL;
 	tail = NULL;
     }
     while(iterator){
-	this->append(iterator->data);
+	this->append(iterator->data);	
 	iterator = iterator->next;
     }
     return *this;

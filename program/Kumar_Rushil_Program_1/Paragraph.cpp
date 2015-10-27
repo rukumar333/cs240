@@ -15,6 +15,8 @@ Paragraph::~Paragraph(){
 	delete tempPointer;	
 	tempPointer = iterator;
     }
+    head = NULL;
+    tail = NULL;
 }    
 
 Paragraph::Paragraph(const Paragraph &p1){
@@ -59,6 +61,7 @@ Paragraph Paragraph::operator--(){
 }
 Paragraph & Paragraph::operator=(const Paragraph &p1){
     // std::cout << "Paragraph assignment operator" << std::endl;
+    this->~Paragraph();
     this->head = NULL;
     this->tail = NULL;
     Node_S * iterator = p1.head;

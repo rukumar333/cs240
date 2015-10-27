@@ -18,7 +18,7 @@ char * copyArray(char * input){
 	while(i < length){
 	    *(output + i) = *(input + i);
 	    ++i;
-	}	
+	}
 	return output;
     }else{
 	return nullptr;
@@ -45,6 +45,7 @@ Word::~Word(){
     if(text != nullptr){
 	delete[] text;	
     }
+    text = nullptr;
 }
 
 Sentence Word::operator+(const Word &w1){
@@ -77,6 +78,7 @@ Word Word::operator--(){
 
 Word & Word::operator=(const Word &w1){
     // std::cout << "Word assignment operator used" << std::endl;
+    delete[] text;
     text = copyArray(w1.text);
 }
 

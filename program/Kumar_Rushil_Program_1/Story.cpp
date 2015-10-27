@@ -46,7 +46,7 @@ Story::Story(std::string s){
 		    // word.show();
 		    // std::cout << "SHOWING SENTENCE" << std::endl;
 		    // sentence.show();
-		    delete[] word.text;
+		    // delete[] word.text;
 		    word = Word(charArray + i + 1);   
 		}
     	    }
@@ -54,7 +54,7 @@ Story::Story(std::string s){
     		sentence = sentence + word;
     		// delete temp;
     		// sentence.append(word);
-    		delete[] word.text;
+    		// delete[] word.text;
     		word = Word(charArray + i + 1 + 1);
 		++i;
 		// std::cout << "PERIOD" << std::endl;
@@ -93,6 +93,8 @@ Story::~Story(){
     	delete tempPointer;	
     	tempPointer = iterator;
     }
+    head = NULL;
+    tail = NULL;
 }    
 
 Story::Story(const Story &s1){
@@ -134,6 +136,7 @@ Story Story::operator--(){
 }
 Story & Story::operator=(const Story &s1){
     // std::cout << "Story assignment operator" << std::endl;     
+    this->~Story();
     this->head = NULL;
     this->tail = NULL;
     Node_P * iterator = s1.head;
