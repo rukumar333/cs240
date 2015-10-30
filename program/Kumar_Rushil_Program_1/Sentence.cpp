@@ -36,31 +36,63 @@ Sentence::Sentence(const Sentence &s1){
 }
 
 Paragraph Sentence::operator+(const Sentence &s1){
-    std::cout << "Sentence + Sentence" << std::endl;
+    Paragraph p;
+    p.append(*this);
+    p.append(s1);
+    return p;
 }
 Paragraph Sentence::operator+(const Paragraph &p1){
-    std::cout << "Sentence + Paragraph" << std::endl;    
+    Paragraph p = p1;
+    p.prepend(*this);
+    return p;
 }
 Sentence Sentence::operator+(const Word &p1){    
-    // std::cout << "Sentence + Word" << std::endl;
     Sentence temp = *this;
     temp.append(p1);
     return temp;
 }
 Sentence Sentence::operator+(const int &i){
-    std::cout << "Sentence + 1 (all other ints should be ignored)" << std::endl; 
+    if(i != 1){
+	return * this;
+    }
+    Node_W * iterator = head;
+    while(iterator){
+	(iterator->data) + 1;
+	iterator = iterator->next;;
+    }
+    return *this;
 }
 Sentence Sentence::operator++(int){
-    std::cout << "Sentence++" << std::endl;     
+    Node_W * iterator = head;
+    while(iterator != nullptr){
+	(iterator->data)++;
+	iterator = iterator->next;
+    }
+    return *this;
 }
 Sentence Sentence::operator--(int){
-    std::cout << "Sentence--" << std::endl;     
+    Node_W * iterator = head;
+    while(iterator){
+	(iterator->data)--;
+	iterator = iterator->next;;
+    }
+    return *this;
 }
 Sentence Sentence::operator++(){
-    std::cout << "++Sentence" << std::endl;     
+    Node_W * iterator = head;
+    while(iterator){
+	++(iterator->data);
+	iterator = iterator->next;;
+    }
+    return *this;
 }
 Sentence Sentence::operator--(){
-    std::cout << "--Sentence" << std::endl;     
+    Node_W * iterator = head;
+    while(iterator){
+	--(iterator->data);
+	iterator = iterator->next;;
+    }
+    return *this;
 }
 Sentence & Sentence::operator=(const Sentence &s1){
     // std::cout << "Sentence assignment operator" << std::endl;

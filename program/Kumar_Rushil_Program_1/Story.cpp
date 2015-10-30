@@ -36,7 +36,6 @@ Story::Story(std::string s){
     	    if(isspace(c)){
 		char next = charArray[i + 1];
 		if(next == ' ' || next == '\t' || next == '\n'){
-		    
 		}else{
 		    // std::cout << "SPACED" << std::endl;
 		    // std::cout << "SHOWING SENTENCE" << std::endl;
@@ -111,28 +110,62 @@ Story::Story(const Story &s1){
 }
 
 Story Story::operator+(const Story &s1){
-    std::cout << "Story + Story" << std::endl;
+    Story s = *this;
+    Node_P * iterator = s1.head;
+    while(iterator){
+	s.append(iterator->data);
+	iterator = iterator->next;
+    }
+    return s;
 }
 Story Story::operator+(const Paragraph &p1){
     // std::cout << "Story + Paragraph" << std::endl;
-    Story temp = *this;
-    temp.append(p1);
-    return temp;
+    Story s = *this;
+    s.append(p1);
+    return s;
 }
 Story Story::operator+(const int &i){
-    std::cout << "Story + 1 (all other ints should be ignored)" << std::endl; 
+    if(i != 1){
+	return *this;
+    }
+    Node_P * iterator = head;
+    while(iterator){
+	(iterator->data) + 1;
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Story Story::operator++(int){
-    std::cout << "Story++" << std::endl;     
+    Node_P * iterator = head;
+    while(iterator){
+	(iterator->data)++;
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Story Story::operator--(int){
-    std::cout << "Story--" << std::endl;     
+    Node_P * iterator = head;
+    while(iterator){
+	(iterator->data)--;
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Story Story::operator++(){
-    std::cout << "++Story" << std::endl;     
+    Node_P * iterator = head;
+    while(iterator){
+	++(iterator->data);
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Story Story::operator--(){
-    std::cout << "--Story" << std::endl;     
+    Node_P * iterator = head;
+    while(iterator){
+	--(iterator->data);
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Story & Story::operator=(const Story &s1){
     // std::cout << "Story assignment operator" << std::endl;     

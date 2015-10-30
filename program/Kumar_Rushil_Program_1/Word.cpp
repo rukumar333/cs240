@@ -39,7 +39,9 @@ Word::Word(char * word){
 
 Word::Word(const Word &w1){
     // std::cout << "Word Copy Constructor" << std::endl;
-    text = copyArray(w1.text);    
+    text = copyArray(w1.text);
+    vowelPigL = w1.vowelPigL;
+    consPigL = w1.consPigL;
 }
 
 Word::~Word(){
@@ -66,6 +68,9 @@ Sentence Word::operator+(const Sentence &s1){
 }
 
 Word Word::operator+(const int &i){
+    if(text == nullptr){
+	return *this;
+    }
     if(i == 1){
 	if(text != nullptr){
 	    *text = toupper(*text);
@@ -75,8 +80,11 @@ Word Word::operator+(const int &i){
 }
 
 Word Word::operator++(int){
+    if(text == nullptr){
+	return *this;
+    }
     char * iterator = text;
-    while(*iterator != '\0'){
+    while(*iterator != '\0' && iterator){
 	*iterator = toupper(*iterator);
 	++iterator;
     }
@@ -84,6 +92,9 @@ Word Word::operator++(int){
 }
 
 Word Word::operator--(int){
+    if(text == nullptr){
+	return *this;
+    }
     char * iterator = text;
     while(*iterator != '\0'){
 	*iterator = tolower(*iterator);
@@ -93,8 +104,18 @@ Word Word::operator--(int){
 }
 
 Word Word::operator++(){
+    if(text == nullptr){
+	return *this;
+    }
+    if(vowelPigL || consPigL){
+	return *this;
+    }
     char * iterator = text;
-    int length = 0;  
+    int length = 0;
+    // bool isUpperCase = false;
+    // if(iterator != nullptr){
+    // 	isUpperCase = isupper(*iterator);
+    // }
     while(*iterator != '\0'){
 	++length;
 	++iterator;
@@ -117,6 +138,7 @@ Word Word::operator++(){
 	++newIterator;
 	delete[] text;
 	text = newText;
+	vowelPigL = true;
     }else{
 	char * newText = new char[length + 2];
 	*(newText + length + 2) = '\0';
@@ -135,6 +157,7 @@ Word Word::operator++(){
 	    ++i;
 	    ++newIterator;
 	}
+	consPigLIter = newIterator;
 	while(iterator != firstVowel){
 	    *newIterator = *iterator;
 	    ++iterator;
@@ -145,18 +168,65 @@ Word Word::operator++(){
 	*newIterator = 'y';
 	delete[] text;
 	text = newText;
+	consPigL = true;
     }
     return *this;
 }
 
 Word Word::operator--(){
-    std::cout << "--Word" << std::endl;
+    if(text == nullptr){
+	return *this;
+    }
+    if(!vowelPigL && !consPigL){
+	return *this;
+    }
+    char * iterator = text;
+    int length = 0;
+    while(*iterator != '\0'){
+	++length;
+	++iterator;
+    }
+    if(vowelPigL){
+	iterator = text;
+	char * newText = new char[length - 3];
+	char * newIterator = newText;
+	*(newText + length - 3) = '\0';
+	while(newIterator != newText + length - 3){
+	    *newIterator = *iterator;
+	    ++newIterator;
+	    ++iterator;
+	}
+	delete[] text;
+	text = newText;
+    }
+    if(consPigL){
+	char * newText = new char[length - 2];
+	char * newIterator = newText;	
+	*(newText + length - 2) = '\0';
+	iterator = consPigLIter;
+	while(iterator != text + length - 2){
+	    *newIterator = *iterator;
+	    ++newIterator;
+	    ++iterator;
+	}
+	iterator = text;
+	while(newIterator != newText + length - 2){
+	    *newIterator = *iterator;
+	    ++newIterator;
+	    ++iterator;
+	}
+	delete[] text;
+	text = newText;
+    }
+    return *this;
 }
 
 Word & Word::operator=(const Word &w1){
     // std::cout << "Word assignment operator used" << std::endl;
     delete[] text;
     text = copyArray(w1.text);
+    vowelPigL = w1.vowelPigL;
+    consPigL = w1.consPigL;
 }
 
 void Word::setText(char * word){
@@ -169,7 +239,7 @@ char * Word::getText(){
 
 void Word::show(){
     int i = 0;
-    while(*(text + i) != '\0'){	
+    while(text && *(text + i) != '\0'){	
     	std::cout << *(text + i);
     	++i;
     }
@@ -181,7 +251,9 @@ std::ostream & operator<<(std::ostream & os, const Word &w1){
     // int i = 0;
     // char * text = w1.text;
     // while(*(text + i) != '\0'){	
-    os << w1.text;
+    if(w1.text){
+	os << w1.text;
+    }
     // }
     return os;
 }

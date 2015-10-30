@@ -7,6 +7,9 @@ class Sentence;
 class Word{
  public:
     char * text;
+    char * consPigLIter = nullptr;
+    bool vowelPigL = false;
+    bool consPigL = false;
     Word();
     Word(char * word);
     Word(const Word &w1);

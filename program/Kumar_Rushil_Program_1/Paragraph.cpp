@@ -33,31 +33,66 @@ Paragraph::Paragraph(const Paragraph &p1){
 }
 
 Paragraph Paragraph::operator+(const Sentence &s1){
-    // std::cout << "Paragraph + Sentence" << std::endl;
     Paragraph temp = *this;
     temp.append(s1);
     return temp;
 }
 Paragraph Paragraph::operator+(const Paragraph &p1){
-    std::cout << "Paragraph + Paragraph" << std::endl;    
+    Paragraph p = *this;
+    Node_S * iterator = p1.head;
+    while(iterator){
+	p.append(iterator->data);
+	iterator = iterator->next;
+    }
+    return p;
 }
 Story Paragraph::operator+(const Story &s1){
-    std::cout << "Paragraph + Story" << std::endl;        
+    Story s = s1;
+    s.prepend(*this);
+    return s;
 }
 Paragraph Paragraph::operator+(const int &i){
-    std::cout << "Paragraph + 1 (all other ints should be ignored)" << std::endl; 
+    if(i != 1){
+	return *this;
+    }
+    Node_S * iterator = head;
+    while(iterator){
+	(iterator->data) + 1;
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Paragraph Paragraph::operator++(int){
-    std::cout << "Paragraph++" << std::endl;     
+    Node_S * iterator = head;
+    while(iterator){
+	(iterator->data)++;
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Paragraph Paragraph::operator--(int){
-    std::cout << "Paragraph--" << std::endl;     
+    Node_S * iterator = head;
+    while(iterator){
+	(iterator->data)--;
+	iterator = iterator->next;;
+    }
+    return *this;
 }
 Paragraph Paragraph::operator++(){
-    std::cout << "++Paragraph" << std::endl;     
+    Node_S * iterator = head;
+    while(iterator){
+	++(iterator->data);
+	iterator = iterator->next;;
+    }
+    return *this;
 }
 Paragraph Paragraph::operator--(){
-    std::cout << "--Paragraph" << std::endl;     
+    Node_S * iterator = head;
+    while(iterator){
+	--(iterator->data);
+	iterator = iterator->next;;
+    }
+    return *this;    
 }
 Paragraph & Paragraph::operator=(const Paragraph &p1){
     // std::cout << "Paragraph assignment operator" << std::endl;
