@@ -23,6 +23,7 @@ Sentence::~Sentence(){
 }    
 
 Sentence::Sentence(const Sentence &s1){
+    // std::cout << "Sentence Copy Constructor" << std::endl;
     Node_W * iterator = s1.head;
     if(!iterator){
 	head = NULL;

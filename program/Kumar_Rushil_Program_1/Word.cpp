@@ -2,6 +2,8 @@
 #include "Sentence.h"
 #include <iostream>
 
+std::string vowel = "aeiouAEIOU";
+
 char * copyArray(char * input){
     int i = 0;
     int length = 0;
@@ -50,26 +52,101 @@ Word::~Word(){
 
 Sentence Word::operator+(const Word &w1){
     // std::cout << "Word + Word" << std::endl;
+    Sentence s;
+    s.append(*this);
+    s.append(w1);
+    return s;
 }
 
 Sentence Word::operator+(const Sentence &s1){
     // std::cout << "Word + Sentence" << std::endl;
+    Sentence s = s1;    
+    s.prepend(*this);
+    return s;
 }
 
 Word Word::operator+(const int &i){
-    std::cout << "Word + 1 (all other ints should be ignored)" << std::endl;
+    if(i == 1){
+	if(text != nullptr){
+	    *text = toupper(*text);
+	}
+    }
+    return *this;
 }
 
 Word Word::operator++(int){
-    std::cout << "Word++" << std::endl;
+    char * iterator = text;
+    while(*iterator != '\0'){
+	*iterator = toupper(*iterator);
+	++iterator;
+    }
+    return *this;
 }
 
 Word Word::operator--(int){
-    std::cout << "Word--" << std::endl;    
+    char * iterator = text;
+    while(*iterator != '\0'){
+	*iterator = tolower(*iterator);
+	++iterator;
+    }
+    return *this;
 }
 
 Word Word::operator++(){
-    std::cout << "++Word" << std::endl;
+    char * iterator = text;
+    int length = 0;  
+    while(*iterator != '\0'){
+	++length;
+	++iterator;
+    }
+    iterator = text;
+    if(vowel.find(*text) != std::string::npos){
+	char * newText = new char[length + 3];
+	*(newText + length + 3) = '\0';
+	char * newIterator = newText;
+	while(*iterator != '\0'){
+	    *newIterator = *iterator;
+	    ++newIterator;
+	    ++iterator;
+	}
+	*newIterator = 'w';
+	++newIterator;
+	*newIterator = 'a';
+	++newIterator;	
+	*newIterator = 'y';
+	++newIterator;
+	delete[] text;
+	text = newText;
+    }else{
+	char * newText = new char[length + 2];
+	*(newText + length + 2) = '\0';
+	char * newIterator = newText;
+	char * firstVowel = nullptr;
+	while(*iterator != '\0' && !firstVowel){
+	    if(vowel.find(*iterator) != std::string::npos){
+		firstVowel = iterator;
+	    }
+	    ++iterator;
+	}
+	iterator = text;
+	int i = 0;
+	while(*(firstVowel + i) != '\0'){
+	    *newIterator = *(firstVowel + i);
+	    ++i;
+	    ++newIterator;
+	}
+	while(iterator != firstVowel){
+	    *newIterator = *iterator;
+	    ++iterator;
+	    ++newIterator;
+	}	
+	*newIterator = 'a';
+	++newIterator;
+	*newIterator = 'y';
+	delete[] text;
+	text = newText;
+    }
+    return *this;
 }
 
 Word Word::operator--(){

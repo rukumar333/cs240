@@ -8,20 +8,55 @@
 #include <ctype.h>
 
 int main(){
-    // char charArray[] = "Hello world";
-    // Word* w = new Word(charArray);
+    char charArray[] = "Strength";
+    // char charArray1[] = "World";
+    Word w = Word(charArray);
+    ++w;
+    w.show();
+    ++w;
+    w.show();
+    // w++;
+    // std::cout << std::endl;
+    // w--;
+    // w.show();
+    // std::cout << std::endl;
+    // w + 1;
+    // w.show();
+    // std::cout << std::endl;
+    // Word w1 = Word(charArray1);
     // Sentence s;
     // Paragraph p;
-    // s = s + *w;
+
+
+    // std::cout << std::endl;
+    // w++;
+    // w.show();
+    // std::cout << std::endl;
+    // s = w + w;
+    // // std::cout << s.head << std::endl;
+    // s.show();
+    // std::cout << std::endl;
+    // s = w + w1;
+    // s.prepend(w1);
+    // // std::cout << s.head << std::endl;
+    // s.show();
+    // std::cout << std::endl;
+    // s.prepend(w);
+    // s.append(w1);
+    // s.show();
+    // std::cout << std::endl;
+    // s = w + s;
+    // s.show();
+    // std::cout << std::endl;
     // s = s + *w;
     // delete w;
     // s.show();
 
-    Story story = Story("STORIES/Brady.txt");
-    // // Story story = Story("STORIES/FreshPrince.txt");
-    // // Story story = Story("STORIES/Gilligan.txt");
-    story.show();
-    story.save("outstory.txt");
+    // Story story = Story("STORIES/Brady.txt");
+    // // // Story story = Story("STORIES/FreshPrince.txt");
+    // // // Story story = Story("STORIES/Gilligan.txt");
+    // story.show();
+    // story.save("outstory.txt");
     
     // std::ifstream file("input.txt");
     // std::string input((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
