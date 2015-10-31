@@ -32,6 +32,8 @@ class Paragraph{
     Paragraph operator--();
     Paragraph & operator=(const Paragraph &p1);
     void show();
+    Sentence first();
+    Paragraph rest();
     friend std::ostream &operator << (std::ostream& os, const Paragraph& p1);
 };
 #endif

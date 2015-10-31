@@ -135,6 +135,25 @@ void Paragraph::prepend(const Sentence &s){
     }    
 }
 
+Sentence Paragraph::first(){
+    if(head){
+	return head->data;
+    }else{
+	Sentence s = Sentence();
+	return s;
+    }
+}
+
+Paragraph Paragraph::rest(){
+    Node_S * iterator = head->next;
+    Paragraph p = Paragraph();
+    while(iterator){
+	p.append(iterator->data);
+	iterator = iterator->next;
+    }
+    return p;
+}
+
 void Paragraph::show(){
     // std::cout << "Paragraph show used" << std::endl;
     Node_S* iterator = head;    

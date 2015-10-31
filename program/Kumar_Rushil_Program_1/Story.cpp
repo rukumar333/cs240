@@ -208,6 +208,25 @@ void Story::prepend(const Paragraph &p){
     }    
 }
 
+Paragraph Story::first(){
+    if(head){
+	return head->data;
+    }else{
+	Paragraph p = Paragraph();
+	return p;
+    }
+}
+
+Story Story::rest(){
+    Node_P * iterator = head->next;
+    Story s = Story();
+    while(iterator){
+	s.append(iterator->data);
+	iterator = iterator->next;
+    }
+    return s;
+}
+
 void Story::show(){
     // std::cout << "Story show used" << std::endl;
     Node_P* iterator = head;

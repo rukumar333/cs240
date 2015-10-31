@@ -33,6 +33,8 @@ class Sentence{
     Sentence & operator=(const Sentence &s1);
     void show();
     void reinit();
+    Word first();
+    Sentence rest();
     friend std::ostream & operator<<(std::ostream & os, const Sentence &s1);
 };
 #endif

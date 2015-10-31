@@ -30,6 +30,8 @@ class Story{
     void append(const Paragraph &p);
     void prepend(const Paragraph &p);
     void show();
+    Paragraph first();
+    Story rest();
     void save(std::string s);
     friend std::ostream &operator << (std::ostream& os, const Story& s1);
 };

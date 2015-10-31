@@ -151,6 +151,25 @@ void Sentence::show(){
     }
 }
 
+Word Sentence::first(){
+    if(head){
+	return head->data;
+    }else{
+	Word w = Word();
+	return w;
+    }
+}
+
+Sentence Sentence::rest(){
+    Node_W * iterator = head->next;
+    Sentence s = Sentence();
+    while(iterator){
+	s.append(iterator->data);
+	iterator = iterator->next;
+    }
+    return s;
+}
+
 std::ostream & operator<<(std::ostream & os, const Sentence &s1){
     Node_W* iterator = s1.head;
     while(iterator != nullptr){
