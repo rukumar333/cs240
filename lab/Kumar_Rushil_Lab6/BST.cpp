@@ -161,13 +161,39 @@ int BST::recursiveRemove(int val, BSTNode * current){
 }
 
 void BST::show(){
-    int height = height();
+    int height = this->height();
+    std::vector<std::string> * output = new std::vector<std::string>(height + 1);
+    // std::cout << "Size: " << output->size() << std::endl;
+    // for(unsigned int i = 0; i < output->size(); i ++){
+    // 	std::cout << i << ": " << (*output)[i] << std::endl;
+    // }
+    output->assign(height + 1, "");
+    // std::cout << "Size: " << output->size() << std::endl;
+    // for(unsigned int i = 0; i < output->size(); i ++){
+    // 	std::cout << i << ": " << (*output)[i] << std::endl;
+    // }
     // std::array<std::string, height> output = std::array<std::string, height>();
-    // recursiveShow(output, root);
+    recursiveShow(output, root, 0);
+    std::cout << "Finished" << std::endl;
+    for(unsigned int i = 0; i < output->size(); i ++){	
+    	std::cout << i << ": " << (*output)[i] << std::endl;
+    }
+    delete output;
 }
 
-void BST::recursiveShow(std::array<){
-    
+void BST::recursiveShow(std::vector<std::string> * output, BSTNode * current, int height){
+    if(current){
+	std::ostringstream oss;
+	oss << current->data;
+	// std::cout << "In here" << std::endl;
+	(*output)[height] = (*output)[height] + oss.str() + " ";
+	// std::cout << "1" << std::endl;
+	// (*output)[height] = (*output)[height] + " ";
+	// std::cout << "2" << std::endl;
+	recursiveShow(output, current->left, height + 1);
+	// std::cout << "3" << std::endl;
+	recursiveShow(output, current->right, height + 1);
+    }
 }
 
 int BST::height(){

@@ -1,8 +1,12 @@
+#include <vector>
+#include <string>
+#include <sstream>
+
 class BST{
  private:
     
  public:
-    struct BSTNode{
+    class BSTNode{
 	int data;
 	BSTNode* left = nullptr;
 	BSTNode* right = nullptr;
@@ -19,6 +23,7 @@ class BST{
     int height();
     int recursiveHeight(BSTNode * current, int height);
     void show();
-    void recursiveShow(std::array, BSTNode * node);
+    void recursiveShow(std::vector<std::string> * output, BSTNode * current, int height);
+    /* void recursiveShow(std::array, BSTNode * node); */
     /* void findMax(BSTNode * current); */
 };
