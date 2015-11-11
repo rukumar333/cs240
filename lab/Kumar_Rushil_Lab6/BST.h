@@ -3,15 +3,15 @@
 #include <sstream>
 
 class BST{
- private:
-    
  public:
     class BSTNode{
+    public:
 	int data;
 	BSTNode* left = nullptr;
 	BSTNode* right = nullptr;
 	BSTNode* parent = nullptr;
     };
+    int size = 0;
     BSTNode* root = nullptr;
     ~BST();
     void recursiveDelete(BSTNode * node);

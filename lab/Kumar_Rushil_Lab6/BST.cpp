@@ -3,6 +3,7 @@
 
 BST::~BST(){
     recursiveDelete(root);
+    size = 0;
 }
 
 void BST::recursiveDelete(BSTNode * node){
@@ -37,6 +38,7 @@ int BST::recursiveInsert(const int &val, BSTNode * node){
 	    node->left = new BSTNode();
 	    node->left->data = val;
 	    node->left->parent = node;
+	    ++ size;
 	    return val;
 	}else{
 	    return recursiveInsert(val, node->left);   
@@ -46,6 +48,7 @@ int BST::recursiveInsert(const int &val, BSTNode * node){
 	    node->right = new BSTNode();
 	    node->right->data = val;
 	    node->right->parent = node;
+	    ++ size;
 	    return val;	    
 	}else{
 	    return recursiveInsert(val, node->right);
@@ -84,11 +87,12 @@ int BST::recursiveRemove(int val, BSTNode * current){
     }
     //Case 1: Node is leaf
     if(current->left == nullptr && current->right == nullptr){
-	std::cout << "Case 1" << std::endl;
+	// std::cout << "Case 1" << std::endl;
 	if(current->data == val){
 	    if(current == root){
 		delete root;
-		root = nullptr;		
+		root = nullptr;
+		-- size;
 		return 1;
 	    }
 	    if(current == current->parent->left){
@@ -98,16 +102,18 @@ int BST::recursiveRemove(int val, BSTNode * current){
 		current->parent->right = nullptr;
 	    }
 	    delete current;
+	    -- size;
 	    return 1;
 	}
     }
     //Case 2: Node has right subtree
     if(current->left == nullptr && current->right != nullptr){
-	std::cout << "Case 2" << std::endl;
+	// std::cout << "Case 2" << std::endl;
 	if(current->data == val){
 	    if(current == root){
 		root = current->right;
 		delete current;
+		-- size;
 		return 1;
 	    }
 	    if(current == current->parent->left){
@@ -117,16 +123,18 @@ int BST::recursiveRemove(int val, BSTNode * current){
 		current->parent->right = current->right;
 	    }
 	    delete current;
+	    -- size;
 	    return 1;
 	}
     }
     //Case 3: Node has left subtree
     if(current->left != nullptr && current->right == nullptr){
-	std::cout << "Case 3" << std::endl;
+	// std::cout << "Case 3" << std::endl;
 	if(current->data == val){
 	    if(current == root){
 		root = current->left;
 		delete current;
+		-- size;
 		return 1;
 	    }
 	    if(current == current->parent->left){
@@ -136,12 +144,13 @@ int BST::recursiveRemove(int val, BSTNode * current){
 		current->parent->right = current->left;
 	    }
 	    delete current;
+	    -- size;
 	    return 1;
 	}	
     }
     //Case 4: Node has left subtree and right subtree
     if(current->left != nullptr && current->right != nullptr){
-	std::cout << "Case 4" << std::endl;
+	// std::cout << "Case 4" << std::endl;
 	if(current->data == val){
 	    BSTNode * iterator = current->left;
 	    while(iterator->right){
@@ -149,6 +158,7 @@ int BST::recursiveRemove(int val, BSTNode * current){
 	    }
 	    current->data = iterator->data;
 	    recursiveRemove(iterator->data, iterator);
+	    -- size;
 	    return 1;
 	}
     }
@@ -163,16 +173,7 @@ int BST::recursiveRemove(int val, BSTNode * current){
 void BST::show(){
     int height = this->height();
     std::vector<std::string> * output = new std::vector<std::string>(height + 1);
-    // std::cout << "Size: " << output->size() << std::endl;
-    // for(unsigned int i = 0; i < output->size(); i ++){
-    // 	std::cout << i << ": " << (*output)[i] << std::endl;
-    // }
     output->assign(height + 1, "");
-    // std::cout << "Size: " << output->size() << std::endl;
-    // for(unsigned int i = 0; i < output->size(); i ++){
-    // 	std::cout << i << ": " << (*output)[i] << std::endl;
-    // }
-    // std::array<std::string, height> output = std::array<std::string, height>();
     recursiveShow(output, root, 0);
     std::cout << "Finished" << std::endl;
     for(unsigned int i = 0; i < output->size(); i ++){	
@@ -185,13 +186,8 @@ void BST::recursiveShow(std::vector<std::string> * output, BSTNode * current, in
     if(current){
 	std::ostringstream oss;
 	oss << current->data;
-	// std::cout << "In here" << std::endl;
 	(*output)[height] = (*output)[height] + oss.str() + " ";
-	// std::cout << "1" << std::endl;
-	// (*output)[height] = (*output)[height] + " ";
-	// std::cout << "2" << std::endl;
 	recursiveShow(output, current->left, height + 1);
-	// std::cout << "3" << std::endl;
 	recursiveShow(output, current->right, height + 1);
     }
 }
