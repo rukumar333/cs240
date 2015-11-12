@@ -2,7 +2,9 @@
 #include "BST.h"
 
 BST::~BST(){
+    // std::cout << "Destructor" << std::endl;
     recursiveDelete(root);
+    // delete root;
     size = 0;
 }
 
@@ -87,8 +89,8 @@ int BST::recursiveRemove(int val, BSTNode * current){
     }
     //Case 1: Node is leaf
     if(current->left == nullptr && current->right == nullptr){
-	// std::cout << "Case 1" << std::endl;
 	if(current->data == val){
+	    // std::cout << "Case 1" << std::endl;
 	    if(current == root){
 		delete root;
 		root = nullptr;
@@ -101,27 +103,39 @@ int BST::recursiveRemove(int val, BSTNode * current){
 	    if(current == current->parent->right){
 		current->parent->right = nullptr;
 	    }
-	    delete current;
+	    current->parent = nullptr;
+	    current->right = nullptr;
+	    current->left = nullptr;
+	    delete current;	    
 	    -- size;
 	    return 1;
 	}
     }
     //Case 2: Node has right subtree
     if(current->left == nullptr && current->right != nullptr){
-	// std::cout << "Case 2" << std::endl;
 	if(current->data == val){
+	    // std::cout << "Case 2" << std::endl;
 	    if(current == root){
 		root = current->right;
 		delete current;
 		-- size;
 		return 1;
 	    }
-	    if(current == current->parent->left){
-		current->parent->left = current->right;
+	    if(current->parent->left){
+		if(current == current->parent->left){
+		    current->parent->left = current->right;
+		    current->right->parent = current->parent;		    
+		}			
 	    }
-	    if(current == current->parent->right){
-		current->parent->right = current->right;
+	    if(current->parent->right){
+		if(current == current->parent->right){
+		    current->parent->right = current->right;
+		    current->right->parent = current->parent;
+		}	
 	    }
+	    current->parent = nullptr;
+	    current->right = nullptr;
+	    current->left = nullptr;
 	    delete current;
 	    -- size;
 	    return 1;
@@ -129,20 +143,29 @@ int BST::recursiveRemove(int val, BSTNode * current){
     }
     //Case 3: Node has left subtree
     if(current->left != nullptr && current->right == nullptr){
-	// std::cout << "Case 3" << std::endl;
 	if(current->data == val){
+	    // std::cout << "Case 3" << std::endl;
 	    if(current == root){
 		root = current->left;
 		delete current;
 		-- size;
 		return 1;
 	    }
-	    if(current == current->parent->left){
-		current->parent->left = current->left;
+	    if(current->parent->left){
+		if(current == current->parent->left){
+		    current->parent->left = current->left;
+		    current->left->parent = current->parent;
+		}	
+	    }	    
+	    if(current->parent->right){		
+		if(current == current->parent->right){
+		    current->parent->right = current->left;
+		    current->left->parent = current->parent;
+		}
 	    }
-	    if(current == current->parent->right){
-		current->parent->right = current->left;
-	    }
+	    current->parent = nullptr;
+	    current->right = nullptr;
+	    current->left = nullptr;
 	    delete current;
 	    -- size;
 	    return 1;
@@ -150,8 +173,8 @@ int BST::recursiveRemove(int val, BSTNode * current){
     }
     //Case 4: Node has left subtree and right subtree
     if(current->left != nullptr && current->right != nullptr){
-	// std::cout << "Case 4" << std::endl;
 	if(current->data == val){
+	    // std::cout << "Case 4" << std::endl;
 	    BSTNode * iterator = current->left;
 	    while(iterator->right){
 		iterator = iterator->right;
@@ -164,9 +187,9 @@ int BST::recursiveRemove(int val, BSTNode * current){
     }
     //Current node does not contain val
     if(current->data > val){
-	recursiveRemove(val, current->left);
+	return recursiveRemove(val, current->left);
     }else{
-	recursiveRemove(val, current->right);
+	return recursiveRemove(val, current->right);
     }
 }
 
@@ -175,7 +198,6 @@ void BST::show(){
     std::vector<std::string> * output = new std::vector<std::string>(height + 1);
     output->assign(height + 1, "");
     recursiveShow(output, root, 0);
-    std::cout << "Finished" << std::endl;
     for(unsigned int i = 0; i < output->size(); i ++){	
     	std::cout << i << ": " << (*output)[i] << std::endl;
     }

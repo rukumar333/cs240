@@ -7,16 +7,15 @@ void test(int max, bool rand){
     BST * tree = new BST();
     std::string randString = "";
     if(rand){
-	std::vector<int> numbers = std::vector<int>();
+	std::vector<int> numbers = std::vector<int>(max);
 	randString = " random ";
 	for(int i = 1; i <= max; i++){
-	    numbers.push_back(i);
+	    numbers[i - 1] = i;
 	}
 	std::random_shuffle(numbers.begin(), numbers.end());
-	for(int i = 0; i <= numbers.size(); i++){
+	for(int i = 0; i < numbers.size(); i++){
 	    tree->insert(numbers[i]);
-	}	
-
+	}
     }else{
 	randString = " in-order ";
 	for(int i = 1; i <= max; i ++){
@@ -38,11 +37,11 @@ void test(int max, bool rand){
     std::cout << "Each find() call on " << max << randString << "node BST takes " << (totalTime / (i - 1)) << " seconds" << std::endl;
     //Removing fours
     for(i = 1; i * 4 <= max; i ++){
-	tree->remove(i * 4);
+    	tree->remove(i * 4);
     }
     gettimeofday(&start, NULL);
     for(i = 1; i * 10000 <= max; i ++){
-	tree->find(i * 10000);
+    	tree->find(i * 10000);
     }
     gettimeofday(&finish, NULL);
     totalTime = 
@@ -52,11 +51,11 @@ void test(int max, bool rand){
     std::cout << "Each find() call on " << max << randString << "node BST after removing multiples of 4 takes " << (totalTime / (i - 1)) << " seconds" << std::endl;
     //Removing twos
     for(i = 1; i * 2 <= max; i ++){
-	tree->remove(i * 2);
+    	tree->remove(i * 2);
     }
     gettimeofday(&start, NULL);
     for(i = 1; i * 10000 <= max; i ++){
-	tree->find(i * 10000);
+    	tree->find(i * 10000);
     }
     gettimeofday(&finish, NULL);
     totalTime = 
@@ -70,10 +69,10 @@ void test(int max, bool rand){
 int main(){
     test(100000, false);
     test(100000, true);
-    // test(75000, false);
-    // test(75000, true);
-    // test(50000, false);
-    // test(50000, true);
+    test(75000, false);
+    test(75000, true);
+    test(50000, false);
+    test(50000, true);
     // test(20000, false);
     // test(30000, true);
     // test(20000, true);
@@ -83,7 +82,7 @@ int main(){
     // test(50000, true);
     // test(10000, true);
     // test(10000, true);
-
+    // test(10000, false);
     // BST tree = BST();
     // for(int i = 0; i <= 100000; i++){ 
     // 	// std::cout << i << std::endl;

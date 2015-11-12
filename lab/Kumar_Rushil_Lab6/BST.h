@@ -6,10 +6,13 @@ class BST{
  public:
     class BSTNode{
     public:
-	int data;
+	int data = 0;
 	BSTNode* left = nullptr;
 	BSTNode* right = nullptr;
 	BSTNode* parent = nullptr;
+	~BSTNode(){
+	    
+	}
     };
     int size = 0;
     BSTNode* root = nullptr;
