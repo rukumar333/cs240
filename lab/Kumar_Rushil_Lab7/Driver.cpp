@@ -2,6 +2,8 @@
 
 int main(){
     Time time = Time("12:00:00");
-    time.show();
+    std::cout << time.stringTime() << std::endl;
+    std::cout << time.addTime("00:05:01") << std::endl;
+    std::cout << time.addTime("24:05:59") << std::endl;
     return 0;
 }

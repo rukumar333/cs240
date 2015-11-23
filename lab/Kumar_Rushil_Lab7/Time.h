@@ -9,7 +9,7 @@ class Time{
     int day;
     Time(int hours, int minutes, int seconds);
     Time(std::string initTime);    
-    std::string addTime(int hours, int minutes, int seconds);
     std::string addTime(std::string addTime);
-    void show();
+    std::string addTime(int hours, int minutes, int seconds);
+    std::string stringTime();
 };
