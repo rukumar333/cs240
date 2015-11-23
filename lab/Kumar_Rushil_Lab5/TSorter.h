@@ -178,5 +178,39 @@ class TSorter{
 	    bubbleInnerR(currentPos);
 	}
     };
-
+    
+    void quickSort(){
+	quickSortR(elements.begin(), elements.end());
+    };
+    
+    template<typename Iterator>
+    void quickSortR(Iterator begin, Iterator end){
+	std::cout << "Between " << *begin << " and " << *(end - 1) << std::endl;
+	if(begin + 1 == end){
+	    return;
+	}
+	if(begin == end){
+	    return;
+	}
+	Iterator pivot = begin;
+	Iterator leftMark = begin + 1;
+	Iterator rightMark = end - 1;
+	while(leftMark != rightMark){
+	    /* std::cout << "In while loop" << std::endl; */
+	    if(*leftMark > *pivot){
+		swap(leftMark, rightMark);
+		-- rightMark;
+	    }else{
+		++ leftMark;
+	    }
+	}
+	std::cout << "Exited loop" << std::endl;
+	show(25, 10);
+	if(*leftMark <= *pivot){
+	    swap(pivot, leftMark);   
+	}
+	show(25, 10);
+	quickSortR(begin, leftMark);
+	quickSortR(leftMark + 1, end);
+    };
 };
