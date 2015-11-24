@@ -72,6 +72,19 @@ Time Time::operator-(const Time& other){
     return t;
 }
 
+int Time::getSeconds(){
+    int val = 0;
+    val = val + day * 24 * 60 * 60;
+    std::cout << val << std::endl;
+    val = val + hours * 60 * 60;
+    std::cout << val << std::endl;
+    val = val + minutes * 60;
+    std::cout << val << std::endl;
+    val = val + seconds;
+    std::cout << val << std::endl;
+    return val;
+}
+
 std::string Time::addTime(int addHours, int addMinutes, int addSeconds){
     seconds = seconds + addSeconds;
     if(seconds >= 60){
