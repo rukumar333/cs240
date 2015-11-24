@@ -1,5 +1,22 @@
 #include "Time.h"
 
+Time::Time(const Time& other){
+    std::cout << "Copy constructor" << std::endl;
+    hours = other.hours;
+    minutes = other.minutes;
+    seconds = other.seconds;
+    day = other.day;
+}
+
+Time& Time::operator=(const Time& other){
+    std::cout << "Assignment operator" << std::endl;
+    hours = other.hours;
+    minutes = other.minutes;
+    seconds = other.seconds;
+    day = other.day;
+    return *this;
+}
+
 Time::Time(int hours, int minutes, int seconds){
     this->hours = hours;
     this->minutes = minutes;
@@ -28,28 +45,31 @@ Time::Time(std::string initTime){
     day = 1;
 }
 
-std::string Time::addTime(std::string timeAdd){
-    int addHours = 0;
-    int addMinutes = 0;
-    int addSeconds = 0;
-    int increment = 0;
-    std::string partTime = "";
-    for(unsigned int i = 0; i < timeAdd.length(); ++ i){
-	if(timeAdd[i] == ':'){
-	    switch(increment){
-	    case 0:
-		addHours = std::stoi(partTime);
-	    case 1:
-		addMinutes = std::stoi(partTime);
-	    }
-	    ++ increment;
-	    partTime = "";
-	}else{
-	    partTime = partTime + timeAdd[i];
-	}
+Time Time::operator+(const Time& other){
+    Time t = Time(*this);
+    t.addTime(other.hours, other.minutes, other.seconds);
+    return t;
+}
+
+Time Time::operator-(const Time& other){
+    Time t = Time(*this);
+    t.seconds = t.seconds - other.seconds;
+    if(t.seconds < 0){
+	t.seconds = 60 + t.seconds;
+	t.minutes = t.minutes - 1;
     }
-    addSeconds = std::stoi(partTime);
-    return addTime(addHours, addMinutes, addSeconds);
+    t.minutes = t.minutes - other.minutes;
+    if(t.minutes < 0){
+	t.minutes = 60 + t.minutes;
+	t.hours = t.hours - 1;
+    }
+    t.hours = t.hours - other.hours;
+    if(t.hours < 0){
+	t.hours = 24 + t.hours;
+	t.day = t.day - 1;
+    }
+    t.day = t.day - other.day;
+    return t;
 }
 
 std::string Time::addTime(int addHours, int addMinutes, int addSeconds){
@@ -72,10 +92,27 @@ std::string Time::addTime(int addHours, int addMinutes, int addSeconds){
 }
 
 std::string Time::stringTime(){
-    std::string str_hours = std::to_string(hours);
+    std::string str_hours = "";
     std::string str_minutes = std::to_string(minutes);
     std::string str_seconds = std::to_string(seconds);
     std::string str_day = std::to_string(day);
+    std::string end = "";
+    if(hours == 0){
+	str_hours = "12";
+	end = "AM";
+    }
+    if(hours == 12){
+	str_hours = "12";
+	end = "PM";
+    }
+    if(hours > 12 && hours < 24){
+	str_hours = std::to_string(hours - 12);
+	end = "PM";
+    }
+    if(hours > 0 && hours < 12){
+	str_hours = std::to_string(hours);
+	end = "AM";
+    }
     if(str_hours.length() == 1){
 	str_hours = "0" + str_hours;
     }
@@ -85,7 +122,8 @@ std::string Time::stringTime(){
     if(str_minutes.length() == 1){
 	str_minutes = "0" + str_minutes;
     }
-    return "[Day " + str_day + ": " + str_hours + ":" + str_minutes + ":" + str_seconds + "]";
+    
+    return "[Day " + str_day + ": " + str_hours + ":" + str_minutes + ":" + str_seconds + end + "]";
 }
 
 
