@@ -1,7 +1,15 @@
 #include "Time.h"
 
+Time::Time(){
+    // std::cout << "Time Default Constructor" << std::endl;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    day = 0;
+}
+
 Time::Time(const Time& other){
-    std::cout << "Copy constructor" << std::endl;
+    // std::cout << "Time Copy constructor" << std::endl;
     hours = other.hours;
     minutes = other.minutes;
     seconds = other.seconds;
@@ -9,7 +17,7 @@ Time::Time(const Time& other){
 }
 
 Time& Time::operator=(const Time& other){
-    std::cout << "Assignment operator" << std::endl;
+    // std::cout << "Time Assignment operator" << std::endl;
     hours = other.hours;
     minutes = other.minutes;
     seconds = other.seconds;
@@ -69,19 +77,16 @@ Time Time::operator-(const Time& other){
 	t.day = t.day - 1;
     }
     t.day = t.day - other.day;
+    
     return t;
 }
 
 int Time::getSeconds(){
     int val = 0;
     val = val + day * 24 * 60 * 60;
-    std::cout << val << std::endl;
     val = val + hours * 60 * 60;
-    std::cout << val << std::endl;
     val = val + minutes * 60;
-    std::cout << val << std::endl;
     val = val + seconds;
-    std::cout << val << std::endl;
     return val;
 }
 

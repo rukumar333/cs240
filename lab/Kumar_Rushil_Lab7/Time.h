@@ -9,6 +9,8 @@ class Time{
     int minutes;
     int seconds;
     int day;
+    //Default Constructor
+    Time();
     //Copy Constructor
     Time(const Time& other);
     //Assignment operator
