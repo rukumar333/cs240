@@ -20,6 +20,7 @@ class Song{
     Song& operator=(const Song& other);    
     void like();
     void dislike();
-    std::string stringSong();
+    int getKey(Time * current);
+    std::string stringSong();    
 };
 #endif

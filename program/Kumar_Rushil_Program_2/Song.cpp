@@ -58,6 +58,11 @@ Song::Song(std::string songInfo){
     lastPlayed = Time();
 }
 
+int Song::getKey(Time * current){
+    Time t = *current - lastPlayed;
+    return t.getSeconds() + (1000 * likeability);
+}
+
 std::string Song::stringSong(){
     std::string val = "";
     val = val + title;

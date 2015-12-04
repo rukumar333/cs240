@@ -76,8 +76,7 @@ Time Time::operator-(const Time& other){
 	t.hours = 24 + t.hours;
 	t.day = t.day - 1;
     }
-    t.day = t.day - other.day;
-    
+    t.day = t.day - other.day;    
     return t;
 }
 
