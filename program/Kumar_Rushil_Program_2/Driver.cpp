@@ -22,17 +22,19 @@ int main(){
     // std::cout << "Starting Radio (try out RUN input.txt)" << std::endl;
     // Radio radio = Radio();
     // radio.runRadio();
-    MaxHeap heap = MaxHeap(10);
-    Time currentTime = Time("12:00:00");
-    std::cout << currentTime.stringTime() << std::endl;
-    Song song = Song("We’re Going to be Friends, The White Stripes, 2:27");
-    Song song2 = Song("Perfect Circle, R.E.M., 3:35");
-    song2.likeability = 1;
-    song2.lastPlayed = currentTime;
-    song.lastPlayed = currentTime;
-    heap.insert(song, &currentTime);
-    heap.insert(song2, &currentTime);
-    heap.insert(song, &currentTime);
-    std::cout << heap.stringHeap() << std::endl;
+
+    // MaxHeap heap = MaxHeap(10);
+    // Time currentTime = Time("12:00:00");
+    // std::cout << currentTime.stringTime() << std::endl;
+    // Song song = Song("We’re Going to be Friends, The White Stripes, 2:27");
+    // Song song2 = Song("Perfect Circle, R.E.M., 3:35");
+    // song2.likeability = 1;
+    // song2.lastPlayed = currentTime;
+    // song.lastPlayed = currentTime;
+    // heap.insert(song, &currentTime);
+    // heap.insert(song2, &currentTime);
+    // heap.insert(song, &currentTime);
+    // std::cout << heap.stringHeap() << std::endl;
+
     return 0;
 }

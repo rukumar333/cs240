@@ -1,13 +1,11 @@
 #include "Radio.h"
 
 Radio::Radio(){
-    currentTime = Time();
-    endSongs = 0;
 }
 
 Radio::~Radio(){
     std::cout << "Destructor for radio" << std::endl;
-    delete[] songs;
+    songs.~MaxHeap();
 }
 
 bool Radio::runRadio(){
@@ -37,19 +35,20 @@ void Radio::init(std::string initInfo){
     std::string partInfo = "";
     for(unsigned int i = 0; i < initInfo.length(); ++ i){
 	if(initInfo[i] == ' '){	    	    
-	    currentTime = Time(partInfo);
+	    songs.currentTime = Time(partInfo);
 	    partInfo = "";	    
 	}else{
 	    partInfo = partInfo + initInfo[i];
 	}
     }
     std::cout << "Max songs: " << partInfo << std::endl;
-    std::cout << "Start time: " << currentTime.stringTime() << std::endl;
-    songs = new Song[std::stoi(partInfo)];
+    std::cout << "Start time: " << songs.currentTime.stringTime() << std::endl;
+    songs = MaxHeap(std::stoi(partInfo));
 }
 
 void Radio::play(std::string numSongs){
     int number = std::stoi(numSongs);
+    
     std::cout << "Playing " << number << " songs" << std::endl;
 }
 
@@ -64,16 +63,16 @@ bool Radio::dislike(std::string song){
 }
 
 bool Radio::addSong(std::string songInfo){
-    *(songs + endSongs) = Song(songInfo);
-    std::cout << "Added " << (songs + endSongs)->stringSong() << std::endl;
-    ++ endSongs;
+    Song s = Song(songInfo);
+    songs.insert(s);
+    std::cout << "Added " << s.stringSong() << std::endl;
     return true;
 }
 
 void Radio::rest(std::string time){
     Time restTime = Time(time);
-    currentTime = currentTime + restTime;
-    std::cout << "Rested. Current time: " << currentTime.stringTime() << std::endl;
+    songs.currentTime = songs.currentTime + restTime;
+    std::cout << "Rested. Current time: " << songs.currentTime.stringTime() << std::endl;
 }
 
 bool Radio::runCommand(std::string input){

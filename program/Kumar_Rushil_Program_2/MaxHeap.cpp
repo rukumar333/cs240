@@ -1,14 +1,24 @@
 #include "MaxHeap.h"
 
+MaxHeap::MaxHeap(){
+    currentTime = Time();
+    songs = nullptr;
+    capacity = 0;
+    length = 0;
+}
+
 MaxHeap::MaxHeap(int capacity){
+    currentTime = Time();
     songs = new Song[capacity + 1];
+    this->capacity = capacity;
     length = 0;
 }
 
 MaxHeap::MaxHeap(const MaxHeap& other){
+    currentTime = other.currentTime;
     length = other.length;
     capacity = other.capacity;
-    songs = new Song[capacity];
+    songs = new Song[capacity + 1];
     for(unsigned int i = 0; i < length; ++ i){
 	*(songs + i) = *(other.songs + i);
     }
@@ -19,59 +29,75 @@ MaxHeap::~MaxHeap(){
     delete[] songs;
 }
 
+MaxHeap& MaxHeap::operator=(const MaxHeap& other){
+    delete[] songs;
+    currentTime = other.currentTime;
+    length = other.length;
+    capacity = other.capacity;
+    songs = new Song[capacity + 1];
+    for(unsigned int i = 0;i < length; ++ i){
+	*(songs + i) = *(other.songs + i);
+    }
+    return *this;
+}
+
 void MaxHeap::swap(int firstPos, int secondPos){
     Song temp = *(songs + firstPos);
     *(songs + firstPos) = *(songs + secondPos);
     *(songs + secondPos) = temp;    
 }
 
-void MaxHeap::pushUp(int pos, Time * current, int key){
+void MaxHeap::pushUp(int pos, int key){
     if(pos != 1){
 	int parentPos = floor(pos / 2);
-	int keyParent = (songs + parentPos)->getKey(current);
+	int keyParent = (songs + parentPos)->getKey(&currentTime);
 	if(keyParent < key){
 	    swap(pos, parentPos);
-	    pushUp(parentPos, current, key);
+	    pushUp(parentPos, key);
 	}
     }
 }
 
-void MaxHeap::pushDown(int pos, Time * current, int key){
+void MaxHeap::pushDown(int pos, int key){
     int keyLeft = 0;
     int keyRight = 0;
     int leftPos = pos * 2;
     int rightPos = pos * 2 + 1;
     if(rightPos < length){
-	keyLeft = (songs + leftPos)->getKey(current);
-	keyRight = (songs + rightPos)->getKey(current);
+	keyLeft = (songs + leftPos)->getKey(&currentTime);
+	keyRight = (songs + rightPos)->getKey(&currentTime);
 	if(keyLeft > keyRight){
 	    if(keyLeft > key){
 		swap(pos, leftPos);
-		pushDown(leftPos, current, key);
+		pushDown(leftPos, key);
 	    }	    
 	}else{
 	    if(keyRight > key){
 		swap(pos, rightPos);
-		pushDown(rightPos, current, key);
+		pushDown(rightPos, key);
 	    }	    
 	}
     }else{
 	if(leftPos < length){
-	    keyLeft = (songs + leftPos)->getKey(current);
+	    keyLeft = (songs + leftPos)->getKey(&currentTime);
 	    if(keyLeft > key){
 		swap(pos, leftPos);
-		pushDown(leftPos, current, key);
+		pushDown(leftPos, key);
 	    }
 	}
     }
 }
 
-void MaxHeap::insert(Song s, Time * current){
+void MaxHeap::insert(Song s){
     ++ length;
-    Time t = *current - s.lastPlayed;
-    int key = t.getSeconds() + (1000 * s.likeability);
+    s.lastPlayed = currentTime;
+    int key = (1000 * s.likeability);
     *(songs + length) = s;
-    pushUp(length, current, key);
+    pushUp(length, key);
+}
+
+Song MaxHeap::getMax(){
+    
 }
 
 std::string MaxHeap::stringHeap(){
@@ -79,6 +105,8 @@ std::string MaxHeap::stringHeap(){
     std::vector<std::string> * result = new std::vector<std::string>();
     recurseString(1, 1, result);    
     std::string val = "";
+    std::cout << "Capacity: " << capacity << std::endl;
+    std::cout << "Length: " << length << std::endl;
     for(unsigned int i = 0; i < result->size(); ++ i){
 	val = val + std::to_string(i + 1) + ") " + (*result)[i] + "\n";
     }

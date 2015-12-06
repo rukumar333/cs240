@@ -4,11 +4,11 @@
 #include <fstream>
 #include "Time.h"
 #include "Song.h"
+#include "MaxHeap.h"
 
 class Radio{
  public:
-    Song * songs;
-    int endSongs;
+    MaxHeap songs;
     Time currentTime;
     Radio();
     ~Radio();

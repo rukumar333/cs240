@@ -17,7 +17,7 @@ class Song{
     Song(const Song& other);
     //Assignment operator
     Song(std::string songInfo);
-    Song& operator=(const Song& other);    
+    Song& operator=(const Song& other);
     void like();
     void dislike();
     int getKey(Time * current);

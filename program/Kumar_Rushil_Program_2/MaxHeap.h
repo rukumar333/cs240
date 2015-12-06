@@ -9,18 +9,22 @@
 
 class MaxHeap{
  public:
+    MaxHeap();
     MaxHeap(int capacity);    
     //Copy constructor
     MaxHeap(const MaxHeap& other);
     //Destructor
     ~MaxHeap();
-    Song *songs;    
+    //Assignment operator
+    MaxHeap& operator=(const MaxHeap& other);
+    Song *songs;
+    Time currentTime;
     int length;
     int capacity;
-    void insert(Song s, Time * current);
+    void insert(Song s);
     Song getMax();
-    void pushDown(int pos, Time * current, int key);
-    void pushUp(int pos, Time * current, int key);
+    void pushDown(int pos, int key);
+    void pushUp(int pos, int key);
     void swap(int firstPos, int secondPos);
     std::string stringHeap();
     void recurseString(int height, int pos, std::vector<std::string> * result);
