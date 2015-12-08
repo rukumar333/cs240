@@ -5,7 +5,7 @@ Radio::Radio(){
 
 Radio::~Radio(){
     std::cout << "Destructor for radio" << std::endl;
-    songs.~MaxHeap();
+    // songs.~MaxHeap();
 }
 
 bool Radio::runRadio(){
@@ -74,6 +74,7 @@ bool Radio::addSong(std::string songInfo){
     Song s = Song(songInfo);
     songs.insert(s);
     std::cout << "Added " << s.stringSong() << std::endl;    
+    std::cout << songs.stringHeap() << std::endl;
     return true;
 }
 
