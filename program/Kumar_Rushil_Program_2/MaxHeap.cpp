@@ -41,6 +41,11 @@ MaxHeap& MaxHeap::operator=(const MaxHeap& other){
     return *this;
 }
 
+void MaxHeap::setCapacity(int capacity){
+    this->capacity = capacity;
+    songs = new Song[capacity + 1];    
+}
+
 void MaxHeap::swap(int firstPos, int secondPos){
     Song temp = *(songs + firstPos);
     *(songs + firstPos) = *(songs + secondPos);
@@ -97,7 +102,12 @@ void MaxHeap::insert(Song s){
 }
 
 Song MaxHeap::getMax(){
-    
+    Song retSong = *(songs + 1);
+    currentTime = currentTime + (songs + 1)->length;
+    (songs + 1)->lastPlayed = currentTime;
+    int key = (songs + 1)->getKey(&currentTime);
+    pushDown(1, key);
+    return retSong;
 }
 
 std::string MaxHeap::stringHeap(){
@@ -118,10 +128,13 @@ void MaxHeap::recurseString(int height, int pos, std::vector<std::string> * resu
     if(pos > length){
 	return;
     }
+    std::string key = "";
     if(result->size() < height){
-	result->push_back((songs + pos)->stringSong());
+	key = std::to_string((songs + pos)->getKey(&currentTime));
+	result->push_back((songs + pos)->stringSong() + " (" + key + ")");
     }else{
-	(*result)[height - 1] = (*result)[height - 1] + " || " + (songs + pos)->stringSong();	
+	key = std::to_string((songs + pos)->getKey(&currentTime));
+	(*result)[height - 1] = (*result)[height - 1] + " || " + (songs + pos)->stringSong() + " (" + key + ")";	
     }
     recurseString(height + 1, pos * 2, result);
     recurseString(height + 1, pos * 2 + 1, result);    

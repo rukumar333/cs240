@@ -35,6 +35,11 @@ int main(){
     // heap.insert(song2, &currentTime);
     // heap.insert(song, &currentTime);
     // std::cout << heap.stringHeap() << std::endl;
-
+    Radio radio = Radio();
+    radio.runRadio();
+    // Time time = Time("12:00:00");
+    // radio.songs.currentTime = time;
+    // radio.songs.capacity = 100;
+    
     return 0;
 }

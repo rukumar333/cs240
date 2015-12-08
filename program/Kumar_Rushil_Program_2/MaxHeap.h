@@ -21,6 +21,7 @@ class MaxHeap{
     Time currentTime;
     int length;
     int capacity;
+    void setCapacity(int capacity);
     void insert(Song s);
     Song getMax();
     void pushDown(int pos, int key);

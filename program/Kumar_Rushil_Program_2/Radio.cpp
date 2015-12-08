@@ -33,6 +33,7 @@ int Radio::runFile(std::string fileName){
 
 void Radio::init(std::string initInfo){
     std::string partInfo = "";
+    songs = MaxHeap();
     for(unsigned int i = 0; i < initInfo.length(); ++ i){
 	if(initInfo[i] == ' '){	    	    
 	    songs.currentTime = Time(partInfo);
@@ -41,15 +42,22 @@ void Radio::init(std::string initInfo){
 	    partInfo = partInfo + initInfo[i];
 	}
     }
+    songs.setCapacity(std::stoi(partInfo));
     std::cout << "Max songs: " << partInfo << std::endl;
     std::cout << "Start time: " << songs.currentTime.stringTime() << std::endl;
-    songs = MaxHeap(std::stoi(partInfo));
+    
 }
 
 void Radio::play(std::string numSongs){
     int number = std::stoi(numSongs);
-    
+    Song song;
     std::cout << "Playing " << number << " songs" << std::endl;
+    for(unsigned int i = 0; i < number; ++ i){
+	std::cout << songs.currentTime.stringTime();
+	song = songs.getMax();
+	std::cout << " " << song.stringSong() << std::endl;
+	std::cout << songs.stringHeap() << std::endl;
+    }
 }
 
 bool Radio::like(std::string song){
@@ -65,7 +73,7 @@ bool Radio::dislike(std::string song){
 bool Radio::addSong(std::string songInfo){
     Song s = Song(songInfo);
     songs.insert(s);
-    std::cout << "Added " << s.stringSong() << std::endl;
+    std::cout << "Added " << s.stringSong() << std::endl;    
     return true;
 }
 
