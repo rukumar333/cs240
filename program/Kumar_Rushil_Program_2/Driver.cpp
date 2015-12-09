@@ -2,6 +2,8 @@
 #include "Song.h"
 #include "Radio.h"
 #include "MaxHeap.h"
+#include "LinkedList.h"
+#include "Hash.h"
 
 int main(){
     // Time time = Time("23:59:59");
@@ -35,11 +37,23 @@ int main(){
     // heap.insert(song2, &currentTime);
     // heap.insert(song, &currentTime);
     // std::cout << heap.stringHeap() << std::endl;
-    Radio radio = Radio();
-    radio.runRadio();
+
+    // Radio radio = Radio();
+    // radio.runRadio();
+
     // Time time = Time("12:00:00");
     // radio.songs.currentTime = time;
     // radio.songs.capacity = 100;
-    
+
+
+    // LinkedList list = LinkedList();
+    // list.append(1);
+    // list.append(9);
+    // list.show();
+    Song song = Song("We’re Going to be Friends, The White Stripes, 2:27");
+    Song song2 = Song("Perfect Circle, R.E.M., 3:35");
+    Hash hash = Hash();
+    std::cout << hash.hashFunction(song) << std::endl;
+    std::cout << hash.hashFunction(song2) << std::endl;
     return 0;
 }

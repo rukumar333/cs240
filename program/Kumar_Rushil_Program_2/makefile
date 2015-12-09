@@ -3,10 +3,13 @@ FLAGS = -g -std=c++11
 all: Driver
 
 Driver: Driver.o
-	g++ $(FLAGS) Driver.o Time.o Song.o Radio.o MaxHeap.o LinkedList.o -o Driver.exe
+	g++ $(FLAGS) Driver.o Time.o Song.o Radio.o MaxHeap.o LinkedList.o Hash.o -o Driver.exe
 
-Driver.o: Song.o Time.o Radio.o MaxHeap.o LinkedList.o Driver.cpp 
+Driver.o: Song.o Time.o Radio.o MaxHeap.o LinkedList.o Hash.o Driver.cpp 
 	g++ $(FLAGS) -c Driver.cpp
+
+Hash.o: Hash.cpp
+	g++ $(FLAGS) -c Hash.cpp
 
 LinkedList.o: LinkedList.cpp
 	g++ $(FLAGS) -c LinkedList.cpp
