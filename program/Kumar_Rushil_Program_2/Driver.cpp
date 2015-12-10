@@ -38,30 +38,29 @@ int main(){
     // heap.insert(song, &currentTime);
     // std::cout << heap.stringHeap() << std::endl;
 
-    // Radio radio = Radio();
-    // radio.runRadio();
-
     // Time time = Time("12:00:00");
     // radio.songs.currentTime = time;
     // radio.songs.capacity = 100;
 
+    Radio radio = Radio();
+    radio.runRadio();
 
     // LinkedList list = LinkedList();
     // list.append(1);
     // list.append(9);
     // list.show();
-    Song song = Song("We’re Going to be Friends, The White Stripes, 2:27");
-    Song song2 = Song("Perfect Circle, R.E.M., 3:35");
-    Hash hash = Hash();
-    hash.setCapacity(1000);
-    std::cout << "Adding" << std::endl;
-    hash.insert(song, 1);
-    hash.insert(song2, 3);    
-    std::cout << hash.getValue(song) << std::endl;
-    std::cout << hash.getValue(song2) << std::endl;
-    hash.update(song, 10);
-    hash.update(song2, 5);    
-    std::cout << hash.getValue(song) << std::endl;
-    std::cout << hash.getValue(song2) << std::endl;
+    // Song song = Song("We’re Going to be Friends, The White Stripes, 2:27");
+    // Song song2 = Song("Perfect Circle, R.E.M., 3:35");
+    // Hash hash = Hash();
+    // hash.setCapacity(1000);
+    // std::cout << "Adding" << std::endl;
+    // hash.insert(song, 1);
+    // hash.insert(song2, 3);    
+    // std::cout << hash.getValue(song) << std::endl;
+    // std::cout << hash.getValue(song2) << std::endl;
+    // hash.update(song, 10);
+    // hash.update(song2, 5);    
+    // std::cout << hash.getValue(song) << std::endl;
+    // std::cout << hash.getValue(song2) << std::endl;
     return 0;
 }

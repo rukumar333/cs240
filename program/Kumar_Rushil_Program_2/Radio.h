@@ -10,6 +10,7 @@ class Radio{
  public:
     MaxHeap songs;
     Time currentTime;
+    std::string lastPlayedTitle;
     Radio();
     ~Radio();
     void init(std::string initInfo);
@@ -18,8 +19,8 @@ class Radio{
     bool runCommand(std::string command);
     bool addSong(std::string songInfo);
     void play(std::string numSongs);
-    bool like(std::string song);
-    bool dislike(std::string song);
+    void like(std::string song);
+    void dislike(std::string song);
     void rest(std::string time);
 };
 

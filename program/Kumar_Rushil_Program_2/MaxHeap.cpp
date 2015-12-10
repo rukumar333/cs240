@@ -28,7 +28,7 @@ MaxHeap::~MaxHeap(){
     }
 }
 
-MaxHeap& MaxHeap::operator=(const MaxHeap& other){
+MaxHeap& MaxHeap::operator=(const MaxHeap& other){    
     if(songs){
 	delete[] songs;
 	songs = nullptr;
@@ -56,6 +56,8 @@ void MaxHeap::setCapacity(int capacity){
 }
 
 void MaxHeap::swap(int firstPos, int secondPos){
+    hashmap.update(*(songs + firstPos), secondPos);
+    hashmap.update(*(songs + secondPos), firstPos);
     Song temp = *(songs + firstPos);
     *(songs + firstPos) = *(songs + secondPos);
     *(songs + secondPos) = temp;    

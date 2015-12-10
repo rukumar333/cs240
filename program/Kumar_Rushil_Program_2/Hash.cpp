@@ -37,7 +37,7 @@ void Hash::update(Song song, int pos){
     int hash = hashFunction(song);
     LinkedList::Node * iterator = (arr + hash)->head;
     while(iterator){
-	if(song.title == iterator->song.title && song.artist == iterator->song.artist){
+	if(song.title == iterator->song.title){
 	    iterator->data = pos;
 	}
 	iterator = iterator->next;
@@ -54,7 +54,7 @@ int Hash::getValue(Song song){
     LinkedList::Node * iterator = (arr + hash)->head;
     int val = -1;
     while(iterator){
-	if(song.title == iterator->song.title && song.artist == iterator->song.artist){
+	if(song.title == iterator->song.title){
 	    val = iterator->data;
 	}
 	iterator = iterator->next;

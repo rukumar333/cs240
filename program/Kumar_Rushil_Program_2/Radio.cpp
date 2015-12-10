@@ -1,6 +1,7 @@
 #include "Radio.h"
 
-Radio::Radio(){    
+Radio::Radio(){
+    lastPlayedTitle = "";
 }
 
 Radio::~Radio(){
@@ -55,19 +56,21 @@ void Radio::play(std::string numSongs){
     for(unsigned int i = 0; i < number; ++ i){
 	std::cout << songs.currentTime.stringTime();
 	song = songs.getMax();
+	lastPlayedTitle = song.title;
 	std::cout << " " << song.stringSong() << std::endl;
 	std::cout << songs.stringHeap() << std::endl;
     }
 }
 
-bool Radio::like(std::string song){
-    std::cout << "Liking " << song << std::endl;    
-    return true;
+void Radio::like(std::string song){    
+    std::cout << "Liking " << song << std::endl;
+    if(song == ""){
+	std::cout << "Empty" << std::endl;	
+    }
 }
 
-bool Radio::dislike(std::string song){
+void Radio::dislike(std::string song){
     std::cout << "Disliking " << song << std::endl;    
-    return true;
 }
 
 bool Radio::addSong(std::string songInfo){
