@@ -48,7 +48,10 @@ void MaxHeap::setCapacity(int capacity){
     if(songs){
 	delete[] songs;
 	songs = nullptr;
-    }    
+    }
+    hashmap.setCapacity(capacity * 2);
+    // hashmap.capacity = capacity * 2;
+    // hashmap.arr = new LinkedList[capacity * 2];
     songs = new Song[capacity + 1];    
 }
 

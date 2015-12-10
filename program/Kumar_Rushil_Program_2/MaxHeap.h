@@ -18,7 +18,7 @@ class MaxHeap{
     ~MaxHeap();
     //Assignment operator
     MaxHeap& operator=(const MaxHeap& other);
-    Hash hash;
+    Hash hashmap;
     Song *songs;
     Time currentTime;
     int length;
