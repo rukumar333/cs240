@@ -5,7 +5,7 @@ Radio::Radio(){
 }
 
 Radio::~Radio(){
-    std::cout << "Destructor for radio" << std::endl;
+    // std::cout << "Destructor for radio" << std::endl;
     // songs.~MaxHeap();
 }
 
@@ -44,47 +44,54 @@ void Radio::init(std::string initInfo){
 	}
     }
     songs.setCapacity(std::stoi(partInfo));
-    std::cout << "Max songs: " << partInfo << std::endl;
-    std::cout << "Start time: " << songs.currentTime.stringTime() << std::endl;
+    // std::cout << "Max songs: " << partInfo << std::endl;
+    // std::cout << "Start time: " << songs.currentTime.stringTime() << std::endl;
     
 }
 
 void Radio::play(std::string numSongs){
     int number = std::stoi(numSongs);
     Song song;
-    std::cout << "Playing " << number << " songs" << std::endl;
+    // std::cout << "Playing " << number << " songs" << std::endl;
     for(unsigned int i = 0; i < number; ++ i){
 	std::cout << songs.currentTime.stringTime();
 	song = songs.getMax();
 	lastPlayedTitle = song.title;
 	std::cout << " " << song.stringSong() << std::endl;
-	std::cout << songs.stringHeap() << std::endl;
+	// std::cout << songs.stringHeap() << std::endl;
     }
 }
 
 void Radio::like(std::string song){    
-    std::cout << "Liking " << song << std::endl;
+    // std::cout << "Liking " << song << std::endl;
     if(song == ""){
-	std::cout << "Empty" << std::endl;	
+	songs.like(lastPlayedTitle);
+    }else{
+	songs.like(song);
     }
 }
 
 void Radio::dislike(std::string song){
-    std::cout << "Disliking " << song << std::endl;    
+    // std::cout << "Disliking " << song << std::endl;
+    if(song == ""){
+	songs.like(lastPlayedTitle);
+    }else{
+	songs.like(song);
+    }
 }
 
 bool Radio::addSong(std::string songInfo){
     Song s = Song(songInfo);
     songs.insert(s);
     std::cout << "Added " << s.stringSong() << std::endl;    
-    std::cout << songs.stringHeap() << std::endl;
+    // std::cout << songs.stringHeap() << std::endl;
     return true;
 }
 
 void Radio::rest(std::string time){
     Time restTime = Time(time);
     songs.currentTime = songs.currentTime + restTime;
-    std::cout << "Rested. Current time: " << songs.currentTime.stringTime() << std::endl;
+    // std::cout << "Rested. Current time: " << songs.currentTime.stringTime() << std::endl;
 }
 
 bool Radio::runCommand(std::string input){

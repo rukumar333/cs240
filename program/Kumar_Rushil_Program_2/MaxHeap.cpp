@@ -22,7 +22,7 @@ MaxHeap::MaxHeap(const MaxHeap& other){
 }
 
 MaxHeap::~MaxHeap(){
-    std::cout << "Heap Destructor" << std::endl;
+    // std::cout << "Heap Destructor" << std::endl;
     if(songs){
 	delete[] songs;	
     }
@@ -109,6 +109,7 @@ void MaxHeap::insert(Song s){
     s.lastPlayed = currentTime;
     int key = (1000 * s.likeability);
     *(songs + length) = s;
+    hashmap.insert(s, length);
     pushUp(length, key);
 }
 
@@ -121,13 +122,47 @@ Song MaxHeap::getMax(){
     return retSong;
 }
 
+void MaxHeap::like(std::string title){
+    Song tmp = Song();
+    tmp.title = title;
+    int pos = hashmap.getValue(tmp);    
+    if(pos == -1){
+	std::cout << title << " is not in your playlist" << std::endl;
+	return;
+    }
+    if((songs + pos)->likeability >= 0){
+	(songs + pos)->likeability ++;
+    }else{
+	(songs + pos)->likeability = 1;
+    }
+    int key = (songs + pos)->getKey(&currentTime);
+    pushUp(pos, key);
+}
+
+void MaxHeap::dislike(std::string title){
+    Song tmp = Song();
+    tmp.title = title;
+    int pos = hashmap.getValue(tmp);
+    if(pos == -1){
+	std::cout << title << " is not in your playlist" << std::endl;
+	return;
+    }
+    if((songs + pos)->likeability < 0){
+	(songs + pos)->likeability --;
+    }else{
+	(songs + pos)->likeability = -1;
+    }
+    int key = (songs + pos)->getKey(&currentTime);
+    pushDown(pos, key);
+}
+
 std::string MaxHeap::stringHeap(){
     // std::vector * result = recurseString(height, 1, "");
     std::vector<std::string> * result = new std::vector<std::string>();
     recurseString(1, 1, result);    
     std::string val = "";
-    std::cout << "Capacity: " << capacity << std::endl;
-    std::cout << "Length: " << length << std::endl;
+    // std::cout << "Capacity: " << capacity << std::endl;
+    // std::cout << "Length: " << length << std::endl;
     for(unsigned int i = 0; i < result->size(); ++ i){
 	val = val + std::to_string(i + 1) + ") " + (*result)[i] + "\n";
     }
@@ -140,12 +175,15 @@ void MaxHeap::recurseString(int height, int pos, std::vector<std::string> * resu
 	return;
     }
     std::string key = "";
+    std::string likeness = "";
     if(result->size() < height){
 	key = std::to_string((songs + pos)->getKey(&currentTime));
-	result->push_back((songs + pos)->stringSong() + " (" + key + ")");
+	likeness = std::to_string((songs + pos)->likeability);
+	result->push_back((songs + pos)->stringSong() + " (" + key + "," + likeness + ")");
     }else{
-	key = std::to_string((songs + pos)->getKey(&currentTime));
-	(*result)[height - 1] = (*result)[height - 1] + " || " + (songs + pos)->stringSong() + " (" + key + ")";	
+	key = std::to_string((songs + pos)->getKey(&currentTime));	
+	likeness = std::to_string((songs + pos)->likeability);
+	(*result)[height - 1] = (*result)[height - 1] + " || " + (songs + pos)->stringSong() + " (" + key + "," + likeness + ")";	
     }
     recurseString(height + 1, pos * 2, result);
     recurseString(height + 1, pos * 2 + 1, result);    

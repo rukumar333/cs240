@@ -29,8 +29,8 @@ class MaxHeap{
     void pushDown(int pos, int key);
     void pushUp(int pos, int key);
     void swap(int firstPos, int secondPos);
-    void like();
-    void dislike();
+    void like(std::string title);
+    void dislike(std::string title);
     std::string stringHeap();
     void recurseString(int height, int pos, std::vector<std::string> * result);
 };
