@@ -11,7 +11,9 @@ Hash::Hash(int initcap){
 }
 
 Hash::~Hash(){
-    delete[] arr;
+    if(arr){
+	delete[] arr;	
+    }
 }
 
 int Hash::hashFunction(Song song){

@@ -38,8 +38,8 @@ int main(){
     // heap.insert(song, &currentTime);
     // std::cout << heap.stringHeap() << std::endl;
 
-    // Radio radio = Radio();
-    // radio.runRadio();
+    Radio radio = Radio();
+    radio.runRadio();
 
     // Time time = Time("12:00:00");
     // radio.songs.currentTime = time;
@@ -50,10 +50,10 @@ int main(){
     // list.append(1);
     // list.append(9);
     // list.show();
-    Song song = Song("We’re Going to be Friends, The White Stripes, 2:27");
-    Song song2 = Song("Perfect Circle, R.E.M., 3:35");
-    Hash hash = Hash();
-    std::cout << hash.hashFunction(song) << std::endl;
-    std::cout << hash.hashFunction(song2) << std::endl;
+    // Song song = Song("We’re Going to be Friends, The White Stripes, 2:27");
+    // Song song2 = Song("Perfect Circle, R.E.M., 3:35");
+    // Hash hash = Hash();
+    // std::cout << hash.hashFunction(song) << std::endl;
+    // std::cout << hash.hashFunction(song2) << std::endl;
     return 0;
 }

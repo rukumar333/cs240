@@ -7,19 +7,10 @@ MaxHeap::MaxHeap(){
     length = 0;
 }
 
-MaxHeap::MaxHeap(int capacity){
-    currentTime = Time();
-    if(songs){
-	delete[] songs;
-    }
-    songs = new Song[capacity + 1];
-    this->capacity = capacity;
-    length = 0;
-}
-
 MaxHeap::MaxHeap(const MaxHeap& other){
     if(songs){
 	delete[] songs;
+	songs = nullptr;
     }
     currentTime = other.currentTime;
     length = other.length;
@@ -32,12 +23,15 @@ MaxHeap::MaxHeap(const MaxHeap& other){
 
 MaxHeap::~MaxHeap(){
     std::cout << "Heap Destructor" << std::endl;
-    delete[] songs;
+    if(songs){
+	delete[] songs;	
+    }
 }
 
 MaxHeap& MaxHeap::operator=(const MaxHeap& other){
     if(songs){
 	delete[] songs;
+	songs = nullptr;
     }
     currentTime = other.currentTime;
     length = other.length;
@@ -53,6 +47,7 @@ void MaxHeap::setCapacity(int capacity){
     this->capacity = capacity;
     if(songs){
 	delete[] songs;
+	songs = nullptr;
     }    
     songs = new Song[capacity + 1];    
 }

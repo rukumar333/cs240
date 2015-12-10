@@ -6,17 +6,19 @@
 #include <string>
 #include "Song.h"
 #include "Time.h"
+#include "Hash.h"
+#include "LinkedList.h"
 
 class MaxHeap{
  public:
     MaxHeap();
-    MaxHeap(int capacity);    
     //Copy constructor
     MaxHeap(const MaxHeap& other);
     //Destructor
     ~MaxHeap();
     //Assignment operator
     MaxHeap& operator=(const MaxHeap& other);
+    Hash hash;
     Song *songs;
     Time currentTime;
     int length;
