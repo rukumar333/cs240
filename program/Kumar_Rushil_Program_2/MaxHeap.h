@@ -2,7 +2,7 @@
 #define Heap_H
 #include <iostream>
 #include <math.h>
-#include <vector>
+/* #include <vector> */
 #include <string>
 #include "Song.h"
 #include "Time.h"
@@ -31,8 +31,8 @@ class MaxHeap{
     void swap(int firstPos, int secondPos);
     void like(std::string title);
     void dislike(std::string title);
-    std::string stringHeap();
-    void recurseString(int height, int pos, std::vector<std::string> * result);
+    /* std::string stringHeap(); */
+    /* void recurseString(int height, int pos, std::vector<std::string> * result); */
 };
 
 #endif

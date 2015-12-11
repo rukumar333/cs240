@@ -83,7 +83,7 @@ void Radio::dislike(std::string song){
 bool Radio::addSong(std::string songInfo){
     Song s = Song(songInfo);
     songs.insert(s);
-    std::cout << "Added " << s.stringSong() << std::endl;    
+    // std::cout << "Added " << s.stringSong() << std::endl;    
     // std::cout << songs.stringHeap() << std::endl;
     return true;
 }
