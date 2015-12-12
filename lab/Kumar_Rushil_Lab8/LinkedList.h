@@ -13,12 +13,18 @@ class LinkedList{
 	std::string data;
 	int arrPos;
     };
+    //White = 0
+    //Gray = 1
+    //Black = 2
+    int color = 0;
+    LinkedList * previous = nullptr;
     Node * head = nullptr;
     Node * tail = nullptr;
-    std::string startCity;
+    std::string startCity = "";
     LinkedList();
     ~LinkedList();
     void append(std::string city, int arrPos);    
+    void show();
 };
 
 #endif

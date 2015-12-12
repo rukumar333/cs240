@@ -26,3 +26,11 @@ void LinkedList::append(std::string city, int arrPos){
 	tail = np;
     }
 }
+
+void LinkedList::show(){
+    Node * iterator = head;
+    while(iterator){
+	std::cout << iterator->data << " (" << iterator->arrPos << ")" << std::endl;
+	iterator = iterator->next;
+    }
+}
