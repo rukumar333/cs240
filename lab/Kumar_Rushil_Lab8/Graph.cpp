@@ -53,7 +53,6 @@ std::string Graph::BFS(std::string from, std::string to){
 	    // std::cout << "Checking here: " << iterator->data << std::endl;
 	    int vertPos = iterator->arrPos;
 	    if(iterator->data == to){
-		std::cout << "Found it" << std::endl;
 		endPos = vertPos;
 		(vertices + vertPos)->color = 1;
 		(vertices + vertPos)->previous = vertices + pos;
